@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html style="margin:0 !important;">
+<head>
+	<meta charset="UTF-8" />
+	<title>Sidrería Volley</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.woff" />
+	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.svg#Age" />
+	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.eot" />
+	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.eot?#iefix" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="js/phaser.min.js"></script>
+	<script src="js/Boot.js"></script>
+	<script src="js/Preloader.js"></script>
+	<script src="js/PreMainMenu.js"></script>
+	<script src="js/MainMenuOnePlayer.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/Game.js"></script>
+	<script src="js/GameOnePlayer.js"></script>
+	<script src="js/GameOver.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body style="background-color:rgb(0,0,0); margin:0 !important;">
+<div class="fontPreload" style="font-family: Age;">.</div>
+<div id="gameContainer" style="margin:auto;">
+	
+
+	
+</div>
+<div id="contiene_mandapuntos" style="">
+		<form id="mandapuntos">
+			<p id="texto_fin"></p>
+			<p id="puntos"></p>
+			<p id="envia_tus_puntos">Envía tu puntuación:</p>
+			<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
+			<button id="envia_tu_nombre"> Enviar </button> 
+		</form>
+		<ul id="contiene_clasificacion">
+		</ul>
+	</div>
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+	//creo el objeto del juego
+	var game = new Phaser.Game(800, 700, Phaser.AUTO, 'gameContainer');
+
+	//añado las 'pantallas'
+	game.state.add('Boot', BasicGame.Boot);
+	game.state.add('Preloader', BasicGame.Preloader);
+	game.state.add('PreMainMenu', BasicGame.PreMainMenu);
+	game.state.add('MainMenuOnePlayer', BasicGame.MainMenuOnePlayer);
+	game.state.add('MainMenu', BasicGame.MainMenu);
+	game.state.add('Game', BasicGame.Game);
+	game.state.add('GameOnePlayer', BasicGame.GameOnePlayer);
+	game.state.add('GameOver', BasicGame.GameOver);
+
+	//empieza
+	game.state.start('Boot');
+
+
+};
+
+</script>
+
+</body>
+</html>

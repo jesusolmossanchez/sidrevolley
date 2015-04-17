@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'Age';
+    src:url('../fonts/Age.ttf.woff') format('woff'),
+        url('../fonts/Age.ttf.svg#Age') format('svg'),
+        url('../fonts/Age.ttf.eot'),
+        url('../fonts/Age.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+	font-family: 'Age';
+}
+canvas{
+	margin:auto;
+}
+.fontPreload{
+    position:absolute;
+    left:-100px;
+}
+#inputtunombre{
+	background-color: rgba(0, 0, 0, 0.7) !important;
+    border: 13px solid #f6f830;
+    border: 2vw solid #f6f830;
+    color: #f6f830;
+    font-size: 40px;
+    font-size: 5vw;
+    padding: 20px 10px;
+    padding: 3vw 2vw;
+    width: 260px;
+    width: 50vw;
+    text-transform: uppercase;
+}
+#envia_tu_nombre{
+	background-color: rgba(0, 0, 0, 0.7) !important;
+    border: 13px solid #f6f830;
+    border: 2vw solid #f6f830;
+    color: #f6f830;
+    font-size: 40px;
+    font-size: 5vw;
+    padding: 20px 10px;
+    padding: 3vw 2vw;
+    //width: 260px;
+}
+#contiene_mandapuntos{
+	display: none;
+    text-align: center;
+    position: absolute;
+    top: 50px;
+    top: 4vw;
+    /* margin-top: -400px; */
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    }
+
+#puntos{
+    color: #f6f830;
+    font-size: 100px;
+    font-size: 10vw;
+    line-height: 1em;
+    margin:0;
+    //text-transform: uppercase;
+}
+#texto_fin{
+    color: #f6f830;
+    font-size: 60px;
+    font-size: 6vw;
+    line-height: 1em;
+    margin:0;
+    //text-transform: uppercase;
+}
+#envia_tus_puntos{
+    color: #f6f830;
+    font-size: 60px;
+    font-size: 6vw;
+    line-height: 1em;
+    margin:0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+#contiene_clasificacion{
+	color: #f6f830;
+	font-size: 40px;
+    font-size: 4vw;
+	line-height: 1.1em;
+	margin: 0;
+	position: relative;
+	/* top: 550px; */
+	/* margin-top: -470px; */
+	width: 80%;
+    max-width: 700px;
+	margin:0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+	text-align: left;
+}
+
+.nombre_clasifica{
+	text-transform: uppercase;
+}
+
+.nombre_clasifica:after {
+    content:"............................................................................................................................................"
+}
+
+dl {
+	overflow: hidden;
+	margin: 0;
+}
+dt {
+	float: left;
+	margin: 0;
+	text-transform: uppercase;
+}
+dd {
+	float: right;
+	margin: 0;
+}
+/* That's the leader! */
+dl:after {
+	content: "............................................................................................................................................";
+	display: block;
+	overflow: hidden;
+	height: 1em;
+}
+/*
+canvas{
+  width: 100%;
+  height: auto;
+}*/
