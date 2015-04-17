@@ -38,9 +38,18 @@ BasicGame.Preloader.prototype = {
 	    this.load.image('titulo_estirado', 'assets/titulo_estirado1.png');
 	    this.load.image('titulo_saltolinea', 'assets/titulo1.png');
 
+
 	    this.load.image('1jugador', 'assets/1jugador.png');
 	    this.load.image('2jugadores', 'assets/2jugadores.png');
-	    this.load.image('jugadores_seleccionado', 'assets/jugadores_seleccionado.png');
+	    this.load.image('jugadores_seleccionado', 'assets/boton_seleccion.png');
+
+
+	    this.load.image('chupao', 'assets/chupao.png');
+	    this.load.image('normalico', 'assets/normalico.png');
+	    this.load.image('jodio', 'assets/jodio.png');
+	    
+	    this.load.image('select_dificultad', 'assets/select_dificultad.png');
+	    this.load.image('movil_select_dificultad', 'assets/movil_select_dificultad.png');
 
 
 	    this.load.image('movimientos1', 'assets/movimientos1.png');
@@ -128,7 +137,7 @@ BasicGame.Preloader.prototype = {
 			this.state.start('PreMainMenu');
 		}
 		else{
-			this.state.start('MainMenuOnePlayer');
+			this.state.start('LevelMenu');
 		}
 
 	},

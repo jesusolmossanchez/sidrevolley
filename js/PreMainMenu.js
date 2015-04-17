@@ -18,10 +18,11 @@ BasicGame.PreMainMenu.prototype = {
 		this.background = this.add.sprite(this.world.centerX - titulo.width/2.0, 120, 'titulo_saltolinea');
 
 		var jugador1 = this.cache.getImage('1jugador');
+		var jugadores_seleccionado = this.cache.getImage('jugadores_seleccionado');
 		this.jugar1player = this.add.sprite(this.world.centerX - jugador1.width/2.0, 300, '1jugador');
 		this.jugar2player = this.add.sprite(this.world.centerX - jugador1.width/2.0, 400, '2jugadores');
 
-		this.select_tipo = this.add.sprite(this.world.centerX - jugador1.width/2.0, 300, 'jugadores_seleccionado');
+		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 300, 'jugadores_seleccionado');
 
 		//inicializo si son dos jugadores
 		this.is_two_players = false;
@@ -54,7 +55,7 @@ BasicGame.PreMainMenu.prototype = {
 				this.state.start('MainMenu');
 			}
 			else{
-				this.state.start('MainMenuOnePlayer');
+				this.state.start('LevelMenu');
 			}
 		}
 

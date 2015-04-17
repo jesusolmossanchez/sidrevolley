@@ -61,7 +61,7 @@ BasicGame.GameOnePlayer.prototype = {
 
         this.sombra1 = this.add.sprite(32, 500, 'sombra');
         this.sombra_pelota = this.add.sprite(32, 500, 'sombra');
-        this.sombra2 = this.add.sprite(this.world.width - 32, 500, 'sombra');
+        this.sombra2 = this.add.sprite(this.world.width - 52, 500, 'sombra');
         this.sombra1.alpha = 0.5;
         this.sombra2.alpha = 0.5;
         this.sombra_pelota.alpha = 0.2;
@@ -197,88 +197,88 @@ BasicGame.GameOnePlayer.prototype = {
 
         switch(que_player2) {
             case 1:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'mostri');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'mostri');
                 break;
             case 2:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'chino1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'chino1');
                 break;
             case 3:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'adri1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'adri1');
                 break;
             case 4:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'bambi1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'bambi1');
                 break;
             case 5:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'edu1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'edu1');
                 break;
             case 6:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'dictinio1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'dictinio1');
                 break;
             case 7:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'fagg1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'fagg1');
                 break;
             case 8:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'jesus1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jesus1');
                 break;
             case 9:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'jorgi1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jorgi1');
                 break;
             case 10:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'juan1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'juan1');
                 break;
             case 11:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'juanfran1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'juanfran1');
                 break;
             case 12:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'kenny1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'kenny1');
                 break;
             case 13:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'jenny1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jenny1');
                 break;
             case 14:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'laura1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'laura1');
                 break;
             case 15:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'maria1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'maria1');
                 break;
             case 16:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'marta1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'marta1');
                 break;
             case 17:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'laurapina1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'laurapina1');
                 break;
             case 18:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'miguel1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'miguel1');
                 break;
             case 19:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'mikel1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'mikel1');
                 break;
             case 20:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'paco1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'paco1');
                 break;
             case 21:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'paqui1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'paqui1');
                 break;
             case 22:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'pedro1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'pedro1');
                 break;
             case 23:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'rebe1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'rebe1');
                 break;
             case 24:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'romero1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'romero1');
                 break;
             case 25:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'sergio1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'sergio1');
                 break;
             case 26:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'terry1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'terry1');
                 break;
             case 27:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'alvarito1');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'alvarito1');
                 break;
             case 28:
-                this.game.player2 = this.add.sprite(this.world.width - 32, this.world.height - 250, 'pinchi');
+                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'pinchi');
                 break;
         } 
         this.game.player2.anchor.setTo(0.5, 0.5);
@@ -373,6 +373,10 @@ BasicGame.GameOnePlayer.prototype = {
         this.game.hasperdio = false;
         this.game.unplayer = true;
         this.game.empieza = this.time.now;
+
+
+        //control para nivel de dificultad
+        //this.game.level = 2;
 
 
         window.onkeydown = function() {
@@ -512,7 +516,15 @@ BasicGame.GameOnePlayer.prototype = {
             }
 
             //MOVIMIENTO PLAYER2
-
+            /*
+            this.nocontroles++;
+            if (this.limite_nocontroles != this.nocontroles){
+                this.procesa_movimientos_maquina();
+            }
+            else{
+                this.nocontroles = 0;
+            }
+            */
             this.procesa_movimientos_maquina();
 
 
@@ -605,6 +617,26 @@ BasicGame.GameOnePlayer.prototype = {
         H = (this.pelota.body.position.y-515)*(-1);
         Vx = this.pelota.body.velocity.x
         Vy = this.pelota.body.velocity.y;
+
+        if (this.game.level == 0){
+            cuantocorre = 135;
+            cuantocorre_gorrino = 300;
+            cuanto_tiempo_enfadao = 700;
+            cuanto_tiempo_gorrino = 300;
+        }
+        else if (this.game.level == 1){
+            cuantocorre = 125;
+            cuantocorre_gorrino = 300;
+            cuanto_tiempo_enfadao = 700;
+            cuanto_tiempo_gorrino = 300;
+        }
+        else if (this.game.level == 2){
+            cuantocorre = 150;
+            cuantocorre_gorrino = 400;
+            cuanto_tiempo_enfadao = 700;
+            cuanto_tiempo_gorrino = 300;
+        }
+        
         
         //calcula donde cae
         if (Vy<0){
@@ -624,7 +656,7 @@ BasicGame.GameOnePlayer.prototype = {
         if(this.dondecae > 360){
             //si cae a mi izquierda, me muevo pallá
             if(this.dondecae<this.game.player2.position.x && !this.game.player2.hace_gorrino){
-                this.game.player2.body.velocity.x = -150;
+                this.game.player2.body.velocity.x = -cuantocorre;
                 if (this.time.now > this.game.player2.enfadao_time && this.game.player2.body.velocity.x != 0){
                     this.game.player2.animations.play('semueve');
                 }
@@ -632,7 +664,7 @@ BasicGame.GameOnePlayer.prototype = {
             //si cae a mi derecha, me muevo palla
             else{
                 if (!this.game.player2.hace_gorrino){
-                    this.game.player2.body.velocity.x = 150;
+                    this.game.player2.body.velocity.x = cuantocorre;
                     if (this.time.now > this.game.player2.enfadao_time && this.game.player2.body.velocity.x != 0){
                         this.game.player2.animations.play('semueve');
                     }
@@ -643,7 +675,7 @@ BasicGame.GameOnePlayer.prototype = {
                 this.game.player2.body.velocity.y = -550;
                 this.game.player2.enfadao = true;
                 this.game.player2.animations.play('senfada');
-                this.game.player2.enfadao_time = this.time.now + 700;
+                this.game.player2.enfadao_time = this.time.now + cuanto_tiempo_enfadao;
 
             }
 
@@ -657,28 +689,31 @@ BasicGame.GameOnePlayer.prototype = {
 
 
         //a veces no hay donde cae y la lia la maquina, jejej
-        if(H<200){
-            if(this.dondecae<this.game.player2.position.x){
-                if(this.game.player2.position.x - this.dondecae > 130 && x>460 && !this.game.player2.hace_gorrino){
-                    //this.acho_audio2.play();
-                    this.game.player2.body.velocity.x = -400;
-                    this.game.player2.body.rotation = -90;
-                    this.game.player2.tiempo_gorrino = this.time.now + 400;
-                    this.game.player2.hace_gorrino=true;
-                }
+        if (this.game.level != 0){
+            if(H<200){
+                if(this.dondecae<this.game.player2.position.x){
+                    if(this.game.player2.position.x - this.dondecae > 130 && x>460 && !this.game.player2.hace_gorrino){
+                        //this.acho_audio2.play();
+                        this.game.player2.body.velocity.x = -cuantocorre_gorrino;
+                        this.game.player2.body.rotation = -90;
+                        this.game.player2.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
+                        this.game.player2.hace_gorrino=true;
+                    }
 
-            }
-            else{
-                if(this.dondecae-this.game.player2.position.x > 130 && x>460 && !this.game.player2.hace_gorrino){
-                    //this.acho_audio2.play();
-                    this.game.player2.body.velocity.x = 400;
-                    this.game.player2.body.rotation = 90;
-                    this.game.player2.tiempo_gorrino = this.time.now + 400;
-                    this.game.player2.hace_gorrino=true;
                 }
+                else{
+                    if(this.dondecae-this.game.player2.position.x > 130 && x>460 && !this.game.player2.hace_gorrino){
+                        //this.acho_audio2.play();
+                        this.game.player2.body.velocity.x = cuantocorre_gorrino;
+                        this.game.player2.body.rotation = 90;
+                        this.game.player2.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
+                        this.game.player2.hace_gorrino=true;
+                    }
 
+                }
             }
         }
+        
 
         
         
@@ -798,6 +833,20 @@ BasicGame.GameOnePlayer.prototype = {
         if (this.punto){
             return true;
         }
+
+        if (this.game.level == 0){
+            this.factor_facilidad_x = 0.6;
+            this.factor_facilidad_y = 0.8;
+        }
+        else if (this.game.level == 1){
+            this.factor_facilidad_x = 0.9;
+            this.factor_facilidad_y = 0.9;
+        }
+        else if (this.game.level == 2){
+            this.factor_facilidad_x = 1;
+            this.factor_facilidad_y = 1;
+        }
+
         this.pelota.body.gravity.y = 900;
         this.pelota.body.velocity.y = -600;
         pos_pelota = this.pelota.body.position.x;
@@ -812,23 +861,23 @@ BasicGame.GameOnePlayer.prototype = {
            if (quehago == 0)
             {
                 this.pelota.body.velocity.y = v_y_pelota*0.3;
-                this.pelota.body.velocity.x = -800;
-                this.pelota.body.gravity.y = 1400;
+                this.pelota.body.velocity.x = -800*this.factor_facilidad_x;
+                this.pelota.body.gravity.y = 1400*this.factor_facilidad_x;
             }
             else if(quehago == 1){
-                this.pelota.body.velocity.y = -800;
-                this.pelota.body.velocity.x = 800;
-                this.pelota.body.gravity.y = 1400;
+                this.pelota.body.velocity.y = -800*this.factor_facilidad_y;
+                this.pelota.body.velocity.x = 800*this.factor_facilidad_x;
+                this.pelota.body.gravity.y = 1400*this.factor_facilidad_x;
             }
             else if(quehago == 2){
-                this.pelota.body.velocity.y = -800;
-                this.pelota.body.velocity.x = -800;
-                this.pelota.body.gravity.y = 1400;
+                this.pelota.body.velocity.y = -800*this.factor_facilidad_y;
+                this.pelota.body.velocity.x = -800*this.factor_facilidad_x;
+                this.pelota.body.gravity.y = 1400*this.factor_facilidad_x;
             }
             else if(quehago == 3){
-                this.pelota.body.velocity.y = 800;
-                this.pelota.body.velocity.x = -1000;
-                this.pelota.body.gravity.y = 1400;
+                this.pelota.body.velocity.y = 800*this.factor_facilidad_y;
+                this.pelota.body.velocity.x = -1000*this.factor_facilidad_x;
+                this.pelota.body.gravity.y = 1400*this.factor_facilidad_x;
             }
             /*
             else if(!cursors.right.isDown && !cursors.left.isDown && !cursors.up.isDown && cursors.down.isDown){
@@ -859,7 +908,7 @@ BasicGame.GameOnePlayer.prototype = {
         this.game.player.body.velocity.x = 0;
         this.game.player.body.velocity.y = 0;
 
-        this.game.player2.body.position.x = this.world.width - 32;
+        this.game.player2.body.position.x = this.world.width - 52;
         this.game.player2.body.position.y = this.world.height - 350;
         this.game.player2.body.velocity.x = 0;
         this.game.player2.body.velocity.y = 0;
@@ -871,7 +920,7 @@ BasicGame.GameOnePlayer.prototype = {
             this.pelota.body.position.x = 32;
         }
         else{
-            this.pelota.body.position.x = this.world.width - 32;
+            this.pelota.body.position.x = this.world.width - 52;
         }
     }
 
