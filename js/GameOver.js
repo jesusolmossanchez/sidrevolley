@@ -64,11 +64,21 @@ BasicGame.GameOver.prototype = {
 		if(this.game.unplayer){
 			var tiempofinal = this.time.now - this.game.empieza;
 			var resultado;
+			var level;
 			if(this.game.hasperdio == true){
 				resultado = "perdio";
 			}
 			else{
 				resultado = "ganao";
+			}
+			if (this.game.level == 0){
+				level = "chupao";
+			}
+			else if (this.game.level == 1){
+				level = "normalico";
+			}
+			else if (this.game.level == 2){
+				level = "jodio";
 			}
 			
 			$("#mandapuntos").show();
@@ -81,14 +91,15 @@ BasicGame.GameOver.prototype = {
 			$("#envia_tu_nombre").click(function(e){
 				e.preventDefault();
 				if (window.entra < 1){
-					window.entra = 1;
+					//window.entra = 1;
 					var post_data= {
 								        nombre: $("#inputtunombre").val(),
 								        diferencia: diferencia,
 								        puntuacion: puntuacion,
-								        tiempo: tiempofinal
+								        tiempo: tiempofinal,
+								        level: level
 								    }
-					$.post( "test.php", post_data)
+					$.post( "registrapuntos.php", post_data)
 						.done(function( data ) {
 							
 							$("#mandapuntos").slideUp();
@@ -104,7 +115,7 @@ BasicGame.GameOver.prototype = {
 									seconds="0"+seconds;
 								}
 								var format = minutes + ':' + seconds
-
+								$("#titulo_nivel").html("Nivel: "+level);
 								$("#contiene_clasificacion").html($("#contiene_clasificacion").html()+"<dl><dt>"+this.nombre+"</dt><dd>"+this.puntuacion+"("+format+")</dd></dl>");
 							  	//use obj.id and obj.name here, for example:
 							});

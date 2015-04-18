@@ -99,6 +99,7 @@ canvas{
     left: 0;
     right: 0;
 	text-align: left;
+    padding: 0;
 }
 
 .nombre_clasifica{
@@ -128,6 +129,16 @@ dl:after {
 	display: block;
 	overflow: hidden;
 	height: 1em;
+}
+#titulo_nivel:after{
+    content: "";
+    display: block;
+    overflow: hidden;
+    height: 1em;
+    text-align: center;
+}
+#titulo_nivel{
+    height: 1.4em;
 }
 /*
 canvas{
