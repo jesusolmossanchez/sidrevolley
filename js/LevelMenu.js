@@ -177,13 +177,14 @@ BasicGame.LevelMenu.prototype = {
 
 	empieza: function (pointer) {
 
-    	if (this.select_tipo.position.y == 300){
+		console.log()
+    	if (this.select_tipo.position.y == 150){
 			this.game.level = 0;
 		}
-		if (this.select_tipo.position.y == 400){
+		if (this.select_tipo.position.y == 250){
 			this.game.level = 1;
 		}
-		if (this.select_tipo.position.y == 500){
+		if (this.select_tipo.position.y == 350){
 			this.game.level = 2;
 		}
 		this.state.start('MainMenuOnePlayer');
