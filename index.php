@@ -64,7 +64,7 @@
 		<form id="mandapuntos">
 			<p id="texto_fin"></p>
 			<p id="puntos"></p>
-			<p id="envia_tus_puntos">Envia tu puntuación:</p>
+			<p id="envia_tus_puntos">Send  your  score:</p>
 			<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
 			<button id="envia_tu_nombre"> Enviar </button> 
 		</form>

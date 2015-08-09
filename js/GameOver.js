@@ -67,10 +67,10 @@ BasicGame.GameOver.prototype = {
 			var resultado;
 			var level;
 			if(this.game.hasperdio == true){
-				resultado = "perdio";
+				resultado = "lost";
 			}
 			else{
-				resultado = "ganao";
+				resultado = "win";
 				if (rutajuagdor != false){
 					var post_data= {
 				        rutaplayer: rutajuagdor
@@ -94,7 +94,7 @@ BasicGame.GameOver.prototype = {
 			$("#mandapuntos").show();
 			$("#contiene_mandapuntos").fadeIn();
 			$("#contiene_mandapuntos").focus();
-			$("#texto_fin").text("Acho! has "+resultado);
+			$("#texto_fin").text("You "+resultado);
 			$("#puntos").text(this.game.puntos_player1+" - "+this.game.puntos_player2);
 
 			window.entra = 0;
