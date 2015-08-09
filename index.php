@@ -2,7 +2,7 @@
 <html style="margin:0 !important;">
 <head>
 	<meta charset="UTF-8" />
-	<title>Sidrería Volley</title>
+	<title>Dude Volley</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.woff" />
 	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.svg#Age" />
