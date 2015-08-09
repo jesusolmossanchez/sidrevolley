@@ -633,7 +633,9 @@ BasicGame.GameOnePlayer.prototype = {
         this.pelota.body.velocity.x = diferencia*3;
         if (this.time.now < this.game.player.enfadao_time && this.game.player.enfadao){
             this.acho_audio2.play("",0,0.3);
-            if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
+
+
+            if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
                 && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
             {
                 this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
