@@ -520,7 +520,7 @@ BasicGame.GameOnePlayer.prototype = {
                 }
             }
             //si va a caer cerca, salto y me enfado
-            if(this.dondecae-this.game.player2.position.x < 60 && x>460 && this.game.player2.position.y > 500 && (Vx<100&&Vx>-100) && this.pelota.position.y<430){
+            if(this.dondecae-this.game.player2.position.x < 70 && x>460 && this.game.player2.position.y > 500 && (Vx<120&&Vx>-120) && this.pelota.position.y<430){
                 this.game.player2.body.velocity.y = -550*this.game.factor_slow_velocity;
                 this.game.player2.enfadao = true;
                 this.game.player2.animations.play('senfada');
