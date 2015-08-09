@@ -482,7 +482,7 @@ BasicGame.GameOnePlayer.prototype = {
         else if (this.game.level == 2){
             cuantocorre = 150;
             cuantocorre_gorrino = 400;
-            cuanto_tiempo_enfadao = 700;
+            cuanto_tiempo_enfadao = 800;
             cuanto_tiempo_gorrino = 300;
         }
         
