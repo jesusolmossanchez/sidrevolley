@@ -24,31 +24,38 @@ BasicGame.Preloader.prototype = {
 		//carga de imagenes
 
 
-		this.load.image('sidre1', 'assets/sidre1.png');
-		this.load.image('sky', 'assets/huerta2.png');
-	    this.load.image('ground', 'assets/platform2.png');
-	    this.load.image('red', 'assets/red_estrella_new.png');
+		//this.load.image('sidre1', 'assets/sidre1.png'); //background final -- cambiar
+		this.load.image('sidre1', 'assets/game_over_back.png'); //background final -- cambiar
+		//this.load.image('sky', 'assets/huerta2.png'); // background principal -- cambiar
+		this.load.image('sky', 'assets/new_campo.png'); // background principal -- cambiar
+	    this.load.image('ground', 'assets/platform2.png'); // suelo
+	    //this.load.image('red', 'assets/red_estrella_new.png'); // red -- cambiar
+	    this.load.image('red', 'assets/new_red.png'); // red -- cambiar
 
 	    this.load.image('has_ganao', 'assets/has_ganao.png');
 	    this.load.image('has_perdio', 'assets/has_perdio.png');
-	    this.load.image('palizaca', 'assets/palizaca.png');
-	    this.load.image('otra', 'assets/otra.png');
+	    this.load.image('palizaca', 'assets/palizaca.png'); // deprecated?
+	    this.load.image('otra', 'assets/otra.png'); /// deprecated?
 
-	    this.load.image('sombra', 'assets/sombra.png');
-	    this.load.image('titulo_estirado', 'assets/titulo_estirado1.png');
-	    this.load.image('titulo_saltolinea', 'assets/titulo1.png');
-
-
-	    this.load.image('1jugador', 'assets/1jugador.png');
-	    this.load.image('2jugadores', 'assets/2jugadores.png');
-	    this.load.image('jugadores_seleccionado', 'assets/boton_seleccion.png');
+	    this.load.image('sombra', 'assets/sombra.png'); //sombra -- OK
+	   // this.load.image('titulo_estirado', 'assets/titulo_estirado1.png'); //titulo alargado
+	    this.load.image('titulo_estirado', 'assets/dude_volley.png'); //titulo alargado
+	    this.load.image('titulo_saltolinea', 'assets/titulo1.png'); // titulo sin alargar
 
 
-	    this.load.image('chupao', 'assets/chupao.png');
+	    this.load.image('1jugador', 'assets/1jugador.png'); //titulo 1 jugador -- // deprecated?
+	    this.load.image('2jugadores', 'assets/2jugadores.png');//selector jugador -- // deprecated? 
+	    this.load.image('jugadores_seleccionado', 'assets/boton_seleccion.png'); //seleccion rectangular
+
+
+	    this.load.image('default_player', 'assets/default_player.png'); //titulos dificultades
+	    this.load.image('upload_image', 'assets/upload_image.png');
+	    this.load.image('chupao', 'assets/chupao.png'); //titulos dificultades
 	    this.load.image('normalico', 'assets/normalico.png');
 	    this.load.image('jodio', 'assets/jodio.png');
 	    
-	    this.load.image('select_dificultad', 'assets/select_dificultad.png');
+	    //this.load.image('select_dificultad', 'assets/select_dificultad.png');
+	    this.load.image('select_dificultad', 'assets/select.png');
 	    this.load.image('movil_select_dificultad', 'assets/movil_select_dificultad.png');
 
 
@@ -56,41 +63,17 @@ BasicGame.Preloader.prototype = {
 	    this.load.image('movimientos2', 'assets/movimientos2.png');
 	    this.load.image('movimientos_oneplayer', 'assets/movimientos_oneplayer.png');
 	    this.load.image('movimientos2', 'assets/movimientos2.png');
-	    this.load.image('pelota', 'assets/pelota3.png');
+	    this.load.image('pelota', 'assets/new_pelota.png');
 	    this.load.image('explota', 'assets/explota.png');
 	    this.load.image('all_players', 'assets/all_players2.png');
 
 
 	    this.load.image('select_player1', 'assets/select_player1.png', 80, 80);
 	    this.load.image('select_player2', 'assets/select_player2.png', 80, 80);
-	    this.load.spritesheet('mostri', 'assets/mostri3_enfado.png', 80, 80);
-	    this.load.spritesheet('pinchi', 'assets/pinchi1_enfadao.png', 80, 80);
-	    this.load.spritesheet('chino1', 'assets/chino1_enfadao.png', 80, 80);
-	    this.load.spritesheet('adri1', 'assets/adri1_enfadao.png', 80, 80);
-	    this.load.spritesheet('bambi1', 'assets/bambi1_enfadao.png', 80, 80);
-	    this.load.spritesheet('edu1', 'assets/edu1_enfadao.png', 80, 80);
-	    this.load.spritesheet('fagg1', 'assets/fagg1_enfadao.png', 80, 80);
-	    this.load.spritesheet('jesus1', 'assets/jesus1_enfadao.png', 80, 80);
-	    this.load.spritesheet('jorgi1', 'assets/jorgi1_enfadao.png', 80, 80);
-	    this.load.spritesheet('juan1', 'assets/juan1_enfadao.png', 80, 80);
-	    this.load.spritesheet('juanfran1', 'assets/juanfran1_enfadao.png', 80, 80);
-	    this.load.spritesheet('kenny1', 'assets/kenny1_enfadao.png', 80, 80);
-	    this.load.spritesheet('laura1', 'assets/laura1_enfada.png', 80, 80);
-	    this.load.spritesheet('maria1', 'assets/maria1_enfada.png', 80, 80);
-	    this.load.spritesheet('marta1', 'assets/marta1_enfada.png', 80, 80);
-	    this.load.spritesheet('miguel1', 'assets/miguel1_enfadao.png', 80, 80);
-	    this.load.spritesheet('mikel1', 'assets/mikel1_enfadao.png', 80, 80);
-	    this.load.spritesheet('paqui1', 'assets/paqui1_enfada.png', 80, 80);
-	    this.load.spritesheet('pedro1', 'assets/pedro1_enfadao.png', 80, 80);
-	    this.load.spritesheet('rebe1', 'assets/rebe1_enfada.png', 80, 80);
-	    this.load.spritesheet('romero1', 'assets/romero1_enfadao.png', 80, 80);
-	    this.load.spritesheet('sergio1', 'assets/sergio1_enfadao.png', 80, 80);
-	    this.load.spritesheet('terry1', 'assets/terry1_enfadao.png', 80, 80);
-	    this.load.spritesheet('dictinio1', 'assets/dictinio1_enfadao.png', 80, 80);
-	    this.load.spritesheet('paco1', 'assets/paco1_enfadao.png', 80, 80);
-	    this.load.spritesheet('laurapina1', 'assets/laurapina1_enfada.png', 80, 80);
-	    this.load.spritesheet('jenny1', 'assets/jenny1_enfada.png', 80, 80);
-	    this.load.spritesheet('alvarito1', 'assets/alvarito1_enfadao.png', 80, 80);
+	    /*
+	    this.load.spritesheet('mostri', rutajugador, 80, 80);
+		*/
+	    this.load.spritesheet('cpu', 'cpu_player/cpu_player.png', 80, 110);
 
 	    //botones mobile
 	    
@@ -99,8 +82,10 @@ BasicGame.Preloader.prototype = {
 	    this.load.spritesheet('movil_arr', 'assets/arr_arrow_120.png', 140, 120);
 	    this.load.spritesheet('movil_pika', 'assets/pika_arrow_120.png', 140, 120);
 
-	    this.load.image('movil_jugar', 'assets/ajugar.png');
-	    this.load.image('movil_volver_a_jugar', 'assets/volver_a_jugar.png');
+	    //this.load.image('movil_jugar', 'assets/ajugar.png');
+	    this.load.image('movil_jugar', 'assets/play.png');
+	    //this.load.image('movil_volver_a_jugar', 'assets/volver_a_jugar.png');
+	    this.load.image('movil_volver_a_jugar', 'assets/play_again.png');
 	    this.load.image('movil_comoelegir', 'assets/texto_select.png');
 
 
@@ -132,6 +117,7 @@ BasicGame.Preloader.prototype = {
 
 		
 		//si estamos en pc pasa al premenu(elegir players) sino al menu de un jugador
+		/*
 		this.ready = true;
 		if (this.game.device.desktop){
 			this.state.start('PreMainMenu');
@@ -139,6 +125,8 @@ BasicGame.Preloader.prototype = {
 		else{
 			this.state.start('LevelMenu');
 		}
+		*/
+		this.state.start('SubePlayer');
 
 	},
 

@@ -10,6 +10,7 @@ BasicGame.GameOver.prototype = {
 	create: function () {
 
 		
+			var rutajuagdor = this.game.ruta_jugador;
 
 		
 			relacion = $(window).height()/$(window).width();
@@ -70,6 +71,15 @@ BasicGame.GameOver.prototype = {
 			}
 			else{
 				resultado = "ganao";
+				if (rutajuagdor != false){
+					var post_data= {
+				        rutaplayer: rutajuagdor
+				    }
+					$.post("cambia_imagen_winner.php", post_data)
+						.done(function( data ) {
+							console.log(data);
+					});
+				}
 			}
 			if (this.game.level == 0){
 				level = "chupao";

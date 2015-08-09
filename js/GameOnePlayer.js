@@ -112,182 +112,10 @@ BasicGame.GameOnePlayer.prototype = {
 
 
         //Jugadores
-        switch(que_player1) {
-            case 1:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'mostri');
-                break;
-            case 2:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'chino1');
-                break;
-            case 3:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'adri1');
-                break;
-            case 4:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'bambi1');
-                break;
-            case 5:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'edu1');
-                break;
-            case 6:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'dictinio1');
-                break;
-            case 7:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'fagg1');
-                break;
-            case 8:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'jesus1');
-                break;
-            case 9:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'jorgi1');
-                break;
-            case 10:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'juan1');
-                break;
-            case 11:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'juanfran1');
-                break;
-            case 12:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'kenny1');
-                break;
-            case 13:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'jenny1');
-                break;
-            case 14:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'laura1');
-                break;
-            case 15:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'maria1');
-                break;
-            case 16:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'marta1');
-                break;
-            case 17:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'laurapina1');
-                break;
-            case 18:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'miguel1');
-                break;
-            case 19:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'mikel1');
-                break;
-            case 20:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'paco1');
-                break;
-            case 21:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'paqui1');
-                break;
-            case 22:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'pedro1');
-                break;
-            case 23:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'rebe1');
-                break;
-            case 24:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'romero1');
-                break;
-            case 25:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'sergio1');
-                break;
-            case 26:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'terry1');
-                break;
-            case 27:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'alvarito1');
-                break;
-            case 28:
-                this.game.player = this.add.sprite(32, this.world.height - 250, 'pinchi');
-                break;
-            
-        }  
-        
+        this.game.player = this.add.sprite(32, this.world.height - 250, 'player1');
         this.game.player.anchor.setTo(0.5, 0.5);
 
-        switch(que_player2) {
-            case 1:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'mostri');
-                break;
-            case 2:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'chino1');
-                break;
-            case 3:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'adri1');
-                break;
-            case 4:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'bambi1');
-                break;
-            case 5:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'edu1');
-                break;
-            case 6:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'dictinio1');
-                break;
-            case 7:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'fagg1');
-                break;
-            case 8:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jesus1');
-                break;
-            case 9:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jorgi1');
-                break;
-            case 10:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'juan1');
-                break;
-            case 11:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'juanfran1');
-                break;
-            case 12:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'kenny1');
-                break;
-            case 13:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'jenny1');
-                break;
-            case 14:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'laura1');
-                break;
-            case 15:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'maria1');
-                break;
-            case 16:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'marta1');
-                break;
-            case 17:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'laurapina1');
-                break;
-            case 18:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'miguel1');
-                break;
-            case 19:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'mikel1');
-                break;
-            case 20:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'paco1');
-                break;
-            case 21:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'paqui1');
-                break;
-            case 22:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'pedro1');
-                break;
-            case 23:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'rebe1');
-                break;
-            case 24:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'romero1');
-                break;
-            case 25:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'sergio1');
-                break;
-            case 26:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'terry1');
-                break;
-            case 27:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'alvarito1');
-                break;
-            case 28:
-                this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'pinchi');
-                break;
-        } 
+        this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'cpu');
         this.game.player2.anchor.setTo(0.5, 0.5);
 
 
@@ -318,14 +146,18 @@ BasicGame.GameOnePlayer.prototype = {
         this.pelota.body.deltaMax = (400,400)
 
         //animaciones de movimiento
-        this.game.player.animations.add('semueve', [0, 1], 5, true);
-        this.game.player2.animations.add('semueve', [0, 1], 5, true);
-        this.game.player.animations.add('senfada', [2, 3], 5, true);
-        this.game.player2.animations.add('senfada', [2, 3], 5, true);
+        this.game.player.animations.add('semueve', [0, 1], 7, true);
+        this.game.player.animations.add('senfada', [3], 5, true);
+        this.game.player.animations.add('salta', [2], 5, true);
+        this.game.player2.animations.add('senfada', [0], 5, true);
+        this.game.player2.animations.add('semueve', [2, 3], 7, true);
+        this.game.player2.animations.add('salta', [1], 5, true);
 
         //  The score
-        this.scoreText1 = this.add.text(16, 16, '0', { font: '44px Age', fill: "#eaff02", align: "center" });
-        this.scoreText2 = this.add.text(this.world.width - 38, 16, '0', { font: '44px Age', fill: "#eaff02", align: "center" });
+        //this.scoreText1 = this.add.text(16, 16, '0', { font: '44px Age', fill: "#eaff02", align: "center" });
+        //this.scoreText2 = this.add.text(this.world.width - 38, 16, '0', { font: '44px Age', fill: "#eaff02", align: "center" });
+        this.scoreText1 = this.add.text(16, 16, '0', { font: '44px ArcadeClassic', fill: "#eaff02", align: "center" });
+        this.scoreText2 = this.add.text(this.world.width - 38, 16, '0', { font: '44px ArcadeClassic', fill: "#eaff02", align: "center" });
         this.game.puntos_player1 = 0;
         this.game.puntos_player2 = 0;
 
@@ -387,8 +219,6 @@ BasicGame.GameOnePlayer.prototype = {
         //control para nivel de dificultad
         //this.game.level = 2;
 
-        console.log(this.game.level)
-
         window.onkeydown = function() {
             if (this.PAUSE.game.input.keyboard.event.keyCode == 27){
                 this.PAUSE.game.paused = !this.PAUSE.game.paused;
@@ -446,6 +276,15 @@ BasicGame.GameOnePlayer.prototype = {
 
     update: function () {
 
+
+        if (this.game.player.body.y > 450){
+
+            this.game.player.salta = false;
+        }
+        if (this.game.player2.body.y > 450){
+
+            this.game.player2.salta = false;
+        }
 
         this.sombra1.position.set(this.game.player.body.position.x, this.world.height - 144);
         this.sombra2.position.set(this.game.player2.body.position.x, this.world.height - 144);
@@ -572,7 +411,7 @@ BasicGame.GameOnePlayer.prototype = {
         if(this.pelota.body.position.x > 390){
             this.game.puntos_player1++;
             this.scoreText1.text = this.game.puntos_player1;
-            if (this.game.puntos_player1 >= 10){
+            if (this.game.puntos_player1 >= 1){
                 //////console.log("gameover");
                 
                 this.game.ganador = this.game.player;
@@ -694,7 +533,7 @@ BasicGame.GameOnePlayer.prototype = {
         else{
             //paradico si no cae en mi campo
             this.game.player2.animations.stop();
-            this.game.player2.frame = 1;
+            this.game.player2.frame = 3;
         }
 
 
@@ -748,26 +587,29 @@ BasicGame.GameOnePlayer.prototype = {
         else{
             if (adonde == "izquierda" && quien.position.x > quien.limite_izquierda){
                 quien.body.velocity.x = -150*this.game.factor_slow_velocity;
-                if (this.time.now > quien.enfadao_time){
+                if (this.time.now > quien.enfadao_time && this.game.player.salta != true){
                     quien.animations.play('semueve');
                 }
             }
             else if (adonde == "derecha" && quien.position.x < quien.limite_derecha){
                 quien.body.velocity.x = 150*this.game.factor_slow_velocity;
-                if (this.time.now > quien.enfadao_time){
+                if (this.time.now > quien.enfadao_time && this.game.player.salta != true){
                     quien.animations.play('semueve');
                 }
             }
             else
             {
-                if (adonde == "parao" && this.time.now > quien.enfadao_time){
+                if (adonde == "parao" && this.time.now > quien.enfadao_time && this.game.player.salta != true){
                     quien.animations.stop();
-                    quien.frame = 1;
+                    quien.frame = 0;
                 }
             }
 
             if(adonde == "arriba" && !quien.hace_gorrino && quien.body.touching.down){
                 quien.body.velocity.y = -550*this.game.factor_slow_velocity;
+                this.game.player.salta = true;
+                quien.animations.play('salta');
+                
             }
 
         }
