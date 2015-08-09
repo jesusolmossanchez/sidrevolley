@@ -36,10 +36,15 @@ BasicGame.Entrenamiento.prototype = {
         this.tip2 = this.add.sprite(220, 20, 'tip2');
         this.tip3 = this.add.sprite(420, 20, 'tip3');
         this.tip4 = this.add.sprite(620, 20, 'tip4');
+        
         this.tip1.alpha = 0.5;
         this.tip2.alpha = 0.5;
         this.tip3.alpha = 0.5;
         this.tip4.alpha = 0.5;
+
+        this.volver = this.add.sprite(650, 220, 'volver');
+        this.volver.inputEnabled = true;
+        this.volver.input.sprite.events.onInputDown.add(this.volver_a_jugar, this);
     },
 
     init: function () {
@@ -444,6 +449,10 @@ BasicGame.Entrenamiento.prototype = {
             }
         }
 
+    },
+
+    volver_a_jugar: function () {
+        location.reload();
     }
 
 };

@@ -15,6 +15,7 @@ BasicGame.MainMenuOnePlayer.prototype = {
 			this.load.spritesheet('player1', this.game.ruta_jugador, 80, 110);
 		}
 
+        this.load.image('volver', 'assets/volver.png');
 		if (this.game.device.desktop){
             this.load.image('tip1', 'assets/muevete.png');
             this.load.image('tip2', 'assets/salta_arriba.png');
