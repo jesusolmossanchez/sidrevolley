@@ -50,6 +50,7 @@ BasicGame.Preloader.prototype = {
 
 	    this.load.image('default_player', 'assets/default_player.png'); //titulos dificultades
 	    this.load.image('upload_image', 'assets/upload_image.png');
+	    this.load.image('how_to_play', 'assets/how_to_play.png');
 	    this.load.image('chupao', 'assets/chupao.png'); //titulos dificultades
 	    this.load.image('normalico', 'assets/normalico.png');
 	    this.load.image('jodio', 'assets/jodio.png');

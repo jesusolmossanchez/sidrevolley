@@ -23,6 +23,7 @@
 	<script src="js/MainMenu.js"></script>
 	<script src="js/Game.js"></script>
 	<script src="js/GameOnePlayer.js"></script>
+	<script src="js/Entrenamiento.js"></script>
 	<script src="js/GameOver.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
@@ -90,6 +91,7 @@ window.onload = function() {
 	game.state.add('MainMenu', BasicGame.MainMenu);
 	game.state.add('Game', BasicGame.Game);
 	game.state.add('GameOnePlayer', BasicGame.GameOnePlayer);
+	game.state.add('Entrenamiento', BasicGame.Entrenamiento);
 	game.state.add('GameOver', BasicGame.GameOver);
 
 	//empieza

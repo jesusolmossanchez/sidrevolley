@@ -14,6 +14,19 @@ BasicGame.MainMenuOnePlayer.prototype = {
 		}else{
 			this.load.spritesheet('player1', this.game.ruta_jugador, 80, 110);
 		}
+
+		if (this.game.device.desktop){
+            this.load.image('tip1', 'assets/muevete.png');
+            this.load.image('tip2', 'assets/salta_arriba.png');
+            this.load.image('tip3', 'assets/gorrino.png');
+            this.load.image('tip4', 'assets/mate.png');
+        }
+        else{
+            this.load.image('tip1', 'assets/muevete_movil.png');
+            this.load.image('tip2', 'assets/salta_arriba_movil.png');
+            this.load.image('tip3', 'assets/gorrino_movil.png');
+            this.load.image('tip4', 'assets/mate_movil.png');          
+        }
 	},
 	
 	init: function (){
@@ -44,7 +57,13 @@ BasicGame.MainMenuOnePlayer.prototype = {
 
 	empieza: function (pointer) {
 
-    	this.state.start('GameOnePlayer');
+		if (!this.game.es_entreno){
+    		this.state.start('GameOnePlayer');
+		}
+		else{
+
+    		this.state.start('Entrenamiento');
+		}
 
 	}
 

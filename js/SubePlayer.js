@@ -24,10 +24,13 @@ BasicGame.SubePlayer.prototype = {
 		//aqui pongo seleccionar imagen o subir una
 		this.chupao = this.add.sprite(this.world.centerX - chupao.width/2.0, 150, 'default_player');
 		this.normalico = this.add.sprite(this.world.centerX - chupao.width/2.0, 250, 'upload_image');
+		this.how_to_play = this.add.sprite(this.world.centerX - chupao.width/2.0, 350, 'how_to_play');
 		this.chupao.inputEnabled = true;
 		this.normalico.inputEnabled = true;
+		this.how_to_play.inputEnabled = true;
 		this.chupao.input.sprite.events.onInputDown.add(this.empieza_default, this);
 		this.normalico.input.sprite.events.onInputDown.add(this.empieza_upload, this);
+		this.how_to_play.input.sprite.events.onInputDown.add(this.empieza_how, this);
 
 		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 150, 'jugadores_seleccionado');
 
@@ -146,7 +149,7 @@ BasicGame.SubePlayer.prototype = {
             this.mueveabajo = false;
 
 	        this.pos_select1_y =  this.select_tipo.position.y;
-	        limit_pos_y = 300;
+	        limit_pos_y = 400;
 	        if ((this.pos_select1_y+100) >= limit_pos_y){
 		        //control
 	        }
@@ -186,6 +189,10 @@ BasicGame.SubePlayer.prototype = {
 	},
 	empieza_upload: function (pointer) {
 		this.select_tipo.position.y = 250;
+		this.empieza();
+	},
+	empieza_how: function (pointer) {
+		this.select_tipo.position.y = 350;
 		this.empieza();
 	},
 
@@ -265,6 +272,11 @@ BasicGame.SubePlayer.prototype = {
 
 
 		}
+		if (this.select_tipo.position.y == 350){
+			this.game.level = 2;
+			this.game.normalplayer = true;
+			yomismo.entrena(false);
+		}
 		//
 
 	},
@@ -273,6 +285,13 @@ BasicGame.SubePlayer.prototype = {
 		
 		$("#contiene_foto_subida").css("display","none");
 		this.game.ruta_jugador = ruta_jugador;
+		this.state.start('MainMenuOnePlayer');
+	},
+	entrena: function (ruta_jugador) {
+		
+		$("#contiene_foto_subida").css("display","none");
+		this.game.ruta_jugador = ruta_jugador;
+		this.game.es_entreno = true;
 		this.state.start('MainMenuOnePlayer');
 	}
 
