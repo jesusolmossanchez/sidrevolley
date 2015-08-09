@@ -24,6 +24,10 @@ BasicGame.SubePlayer.prototype = {
 		//aqui pongo seleccionar imagen o subir una
 		this.chupao = this.add.sprite(this.world.centerX - chupao.width/2.0, 150, 'default_player');
 		this.normalico = this.add.sprite(this.world.centerX - chupao.width/2.0, 250, 'upload_image');
+		this.chupao.inputEnabled = true;
+		this.normalico.inputEnabled = true;
+		this.chupao.input.sprite.events.onInputDown.add(this.empieza_default, this);
+		this.normalico.input.sprite.events.onInputDown.add(this.empieza_upload, this);
 
 		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 150, 'jugadores_seleccionado');
 
@@ -174,6 +178,15 @@ BasicGame.SubePlayer.prototype = {
 			this.empieza();
 			
 		}
+	},
+
+	empieza_default: function (pointer) {
+		this.select_tipo.position.y = 150;
+		this.empieza();
+	},
+	empieza_upload: function (pointer) {
+		this.select_tipo.position.y = 250;
+		this.empieza();
 	},
 
 	empieza: function (pointer) {
