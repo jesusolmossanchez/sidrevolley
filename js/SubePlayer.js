@@ -213,6 +213,7 @@ BasicGame.SubePlayer.prototype = {
 			this.normalico.destroy();
 			this.select_tipo.destroy();
 			this.movil_jugar.destroy();
+			this.how_to_play.destroy();
 			if (this.game.device.desktop){
 				this.select_dificultad.destroy();
 			}

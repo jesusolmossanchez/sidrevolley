@@ -68,8 +68,10 @@ BasicGame.GameOnePlayer.prototype = {
 
 
         //VELOCIDAD NORMAL
-        this.game.factor_slow_velocity = 0.8;
-        this.game.factor_slow_gravity = 0.64;
+        //this.game.factor_slow_velocity = 0.8;
+        //this.game.factor_slow_gravity = 0.64;
+        this.game.factor_slow_velocity = 1;
+        this.game.factor_slow_gravity = 1;
 
         //cosas de movil
         if (!this.game.device.desktop){
