@@ -26,6 +26,15 @@ canvas{
 	margin:auto;
 }
 
+#explica_sube > span{
+    margin: 0 1vw;
+}
+#explica_sube {
+    word-break: break-word;
+}
+
+
+
 #click_imagen_cortada{
     /*font-family: 'Age';*/
     font-family: 'ArcadeClassic';
@@ -91,6 +100,18 @@ canvas{
       text-align: center;
       margin-left: 23%;
       padding: 2%;
+      margin-top: 3vw;
+      cursor: pointer;
+}
+
+.jcrop-tracker{
+  border: none !important;
+}
+.jcrop-holder div{
+  border: 0.4vw solid;
+}
+.jcrop-holder div div{
+  border: none;
 }
 
 #contiene_foto_subida{
@@ -98,7 +119,7 @@ canvas{
     text-align: center;
     position: absolute;
     top: 400px;
-    top: 13vw;
+    top: 10vw;
     /* margin-top: -400px; */
     margin-left: auto;
     margin-right: auto;
@@ -116,6 +137,7 @@ canvas{
     background: none;
     border: 1vw solid #f6f830;
     padding: 1vw;
+    margin-top: 1vw;
 }
 .jcrop-holder{
     margin: auto;

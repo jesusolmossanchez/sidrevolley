@@ -50,15 +50,18 @@
 
 	
 </div>
+
 <form id="subefoto" action="sube2.php" method="post" enctype="multipart/form-data" style="display:none;">
+	<div id="explica_sube"><span>Sube</span><span>tu</span><span>imagen</span><span>para</span><span>jugar</span><span>con</span><span>ella</span></div>
     <label for="fileToUpload">
-    	<div id="fakeinput">Sube tu foto</div>
+    	<div id="fakeinput"><span>Subir imagen</span>
+    		<img src="assets/sube.png" style="margin: -1vw 0 -1vw 2vw; width:15%;"></div>
     </label>
     <input type="file" name="fileToUpload" id="fileToUpload" style="display:none"><br/><br/>
     <input id="inputsubefoto" type="submit" value="Aceptar" name="submit" style="display:none">
 </form>
-<div id="contiene_foto_subida" style="max-width:500px;">
-    
+<div id="contiene_foto_subida" style="max-width:600px;">
+    <div id="explica_sube"><span>Selecciona</span><span>el</span><span>area</span><span>a</span><span>recortar</span></div>
 </div>
 <div id="contiene_mandapuntos" style="">
 

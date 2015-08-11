@@ -36,7 +36,7 @@
 
       list($width,$height)=getimagesize($uploadedfile);
 
-      $newwidth=500;
+      $newwidth=400;
       $newheight=($height/$width)*$newwidth;
       $tmp=imagecreatetruecolor($newwidth,$newheight);
 
@@ -122,7 +122,7 @@
     <input type="hidden" id="h" name="h" />
     <input type="hidden" id="nombre" name="nombre" value="<?= $nombre;?>"/>
     <input type="hidden" id="extension" name="extension" value="<?= $extension;?>"/>
-    <input id="click_imagen_cortada" type="submit" value="guardar" />
+    <input id="click_imagen_cortada" type="submit" value="recortar" />
 </form>
 
 

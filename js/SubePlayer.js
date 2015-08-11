@@ -242,7 +242,8 @@ BasicGame.SubePlayer.prototype = {
 						success: function(data){
 							$("#subefoto").hide();
 							$("#contiene_foto_subida").show();
-							$("#contiene_foto_subida").html(data);
+							lo_que_habia = $("#contiene_foto_subida").html();
+							$("#contiene_foto_subida").html(lo_que_habia+data);
 
 
 
