@@ -32,10 +32,10 @@ BasicGame.GameOver.prototype = {
 				$("#inputtunombre").css("font-size",letra2+"px");
 				$("#inputtunombre").css("padding",borde+"px");
 				$("#inputtunombre").css("width",ancho+"px");
-				$("#inputtunombre").css("border",borde+"px solid #f6f830");
+				$("#inputtunombre").css("border",borde+"px solid #f5f823");
 				$("#envia_tu_nombre").css("font-size",letra2+"px");
 				$("#envia_tu_nombre").css("padding",borde+"px");
-				$("#envia_tu_nombre").css("border",borde+"px solid #f6f830");
+				$("#envia_tu_nombre").css("border",borde+"px solid #f5f823");
 
 				$("#contiene_mandapuntos").css("font-size",letra3+"px");
 				$("#contiene_clasificacion").css("font-size",letra3+"px");

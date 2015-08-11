@@ -27,7 +27,7 @@ BasicGame.Preloader.prototype = {
 		//this.load.image('sidre1', 'assets/sidre1.png'); //background final -- cambiar
 		this.load.image('sidre1', 'assets/game_over_back.png'); //background final -- cambiar
 		//this.load.image('sky', 'assets/huerta2.png'); // background principal -- cambiar
-		this.load.image('sky', 'assets/new_campo.png'); // background principal -- cambiar
+		this.load.image('sky', 'assets/new_campo2.png'); // background principal -- cambiar
 	    this.load.image('ground', 'assets/platform2.png'); // suelo
 	    //this.load.image('red', 'assets/red_estrella_new.png'); // red -- cambiar
 	    this.load.image('red', 'assets/new_red.png'); // red -- cambiar

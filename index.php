@@ -52,7 +52,14 @@
 </div>
 
 <form id="subefoto" action="sube2.php" method="post" enctype="multipart/form-data" style="display:none;">
-	<div id="explica_sube"><span>Sube</span><span>tu</span><span>imagen</span><span>para</span><span>jugar</span><span>con</span><span>ella</span></div>
+	<div id="explica_sube">
+		<span>Sube</span><span>tu</span><span>imagen</span><span>para</span><span>crear</span><span>tu</span><span>jugador.</span>
+		<br/>
+		<span>Si</span><span>le</span><span>ganas</span><span>a</span><span>la</span><span>maquina,</span>
+		<br/>
+		<span>juagara</span><span>con</span><span>tu</span><span>imagen</span>
+
+	</div>
     <label for="fileToUpload">
     	<div id="fakeinput"><span>Subir imagen</span>
     		<img src="assets/sube.png" style="margin: -1vw 0 -1vw 2vw; width:15%;"></div>
@@ -82,7 +89,7 @@
 window.onload = function() {
 
 	//creo el objeto del juego
-	var game = new Phaser.Game(800, 700, Phaser.AUTO, 'gameContainer');
+	var game = new Phaser.Game(800, 685, Phaser.AUTO, 'gameContainer');
 
 	//añado las 'pantallas'
 	game.state.add('Boot', BasicGame.Boot);

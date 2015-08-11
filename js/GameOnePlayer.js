@@ -55,13 +55,16 @@ BasicGame.GameOnePlayer.prototype = {
         //  This stops it from falling away when you jump on it
         ground.body.immovable = true;
 
+
+        ///this.world.height
+
         //Red
-        var red = platforms.create(390, 380, 'red');
+        var red = platforms.create(390, this.world.height-320, 'red');
         red.body.immovable = true;
 
-        this.sombra1 = this.add.sprite(32, 500, 'sombra');
-        this.sombra_pelota = this.add.sprite(32, 500, 'sombra');
-        this.sombra2 = this.add.sprite(this.world.width - 52, 500, 'sombra');
+        this.sombra1 = this.add.sprite(32, this.world.height-200, 'sombra');
+        this.sombra_pelota = this.add.sprite(32, this.world.height-200, 'sombra');
+        this.sombra2 = this.add.sprite(this.world.width - 52, this.world.height-200, 'sombra');
         this.sombra1.alpha = 0.5;
         this.sombra2.alpha = 0.5;
         this.sombra_pelota.alpha = 0.2;
@@ -75,10 +78,10 @@ BasicGame.GameOnePlayer.prototype = {
 
         //cosas de movil
         if (!this.game.device.desktop){
-            this.movil_izq = this.add.sprite(5,580,'movil_izq');
-            this.movil_der = this.add.sprite(150,580,'movil_der');
-            this.movil_arr = this.add.sprite(510,580,'movil_arr');
-            this.movil_pika = this.add.sprite(655,580,'movil_pika');
+            this.movil_izq = this.add.sprite(5,this.world.height-120,'movil_izq');
+            this.movil_der = this.add.sprite(150,this.world.height-120,'movil_der');
+            this.movil_arr = this.add.sprite(510,this.world.height-120,'movil_arr');
+            this.movil_pika = this.add.sprite(655,this.world.height-120,'movil_pika');
             this.movil_izq.alpha = 0.5;
             this.movil_der.alpha = 0.5;
             this.movil_arr.alpha = 0.5;
@@ -279,11 +282,11 @@ BasicGame.GameOnePlayer.prototype = {
     update: function () {
 
 
-        if (this.game.player.body.y > 450){
+        if (this.game.player.body.y > this.world.height-250){
 
             this.game.player.salta = false;
         }
-        if (this.game.player2.body.y > 450){
+        if (this.game.player2.body.y > this.world.height-250){
 
             this.game.player2.salta = false;
         }
@@ -380,7 +383,7 @@ BasicGame.GameOnePlayer.prototype = {
 
 
 
-            if(this.pelota.body.position.y > 515){
+            if(this.pelota.body.position.y > this.world.height-185){
                 //LA PELOTA TOCA EL SUELO
                 this.procesapunto();
             }
@@ -465,7 +468,7 @@ BasicGame.GameOnePlayer.prototype = {
     procesa_movimientos_maquina: function () {
         x = this.pelota.body.position.x
         y=515;
-        H = (this.pelota.body.position.y-515)*(-1);
+        H = (this.pelota.body.position.y-(this.world.height-185))*(-1);
         Vx = this.pelota.body.velocity.x
         Vy = this.pelota.body.velocity.y;
 
@@ -522,7 +525,7 @@ BasicGame.GameOnePlayer.prototype = {
                 }
             }
             //si va a caer cerca, salto y me enfado
-            if(this.dondecae-this.game.player2.position.x < 70 && x>460 && this.game.player2.position.y > 500 && (Vx<120&&Vx>-120) && this.pelota.position.y<400){
+            if(this.dondecae-this.game.player2.position.x < 70 && x>440 && (this.game.player2.position.y > this.world.height-200) && (Vx<120&&Vx>-120) && (this.pelota.position.y<this.world.height-300)){
                 this.game.player2.body.velocity.y = -550*this.game.factor_slow_velocity;
                 this.game.player2.enfadao = true;
                 this.game.player2.animations.play('senfada');
@@ -543,7 +546,7 @@ BasicGame.GameOnePlayer.prototype = {
         if (this.game.level != 0){
             if(H<200){
                 if(this.dondecae<this.game.player2.position.x){
-                    if(this.game.player2.position.x - this.dondecae > 130 && x>460 && !this.game.player2.hace_gorrino){
+                    if(this.game.player2.position.x - this.dondecae > 130 && x>440 && !this.game.player2.hace_gorrino){
                         //this.acho_audio2.play();
                         this.game.player2.body.velocity.x = -cuantocorre_gorrino*this.game.factor_slow_velocity;
                         this.game.player2.body.rotation = -90;
@@ -553,7 +556,7 @@ BasicGame.GameOnePlayer.prototype = {
 
                 }
                 else{
-                    if(this.dondecae-this.game.player2.position.x > 130 && x>460 && !this.game.player2.hace_gorrino){
+                    if(this.dondecae-this.game.player2.position.x > 130 && x>440 && !this.game.player2.hace_gorrino){
                         //this.acho_audio2.play();
                         this.game.player2.body.velocity.x = cuantocorre_gorrino*this.game.factor_slow_velocity;
                         this.game.player2.body.rotation = 90;
