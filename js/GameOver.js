@@ -127,7 +127,7 @@ DudeVolley.GameOver.prototype = {
 									seconds="0"+seconds;
 								}
 								var format = minutes + ':' + seconds
-								$("#titulo_nivel").html("Nivel: "+level);
+								//$("#titulo_nivel").html("Nivel: "+level);
 								$("#contiene_clasificacion").html($("#contiene_clasificacion").html()+"<dl><dt>"+this.nombre+"</dt><dd>"+this.puntuacion+"("+format+")</dd></dl>");
 							  	//use obj.id and obj.name here, for example:
 							});

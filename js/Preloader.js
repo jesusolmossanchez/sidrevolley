@@ -48,9 +48,9 @@ DudeVolley.Preloader.prototype = {
 	    this.load.image('jugadores_seleccionado', 'assets/boton_seleccion.png'); //seleccion rectangular
 
 
-	    this.load.image('default_player', 'assets/default_player.png'); //titulos dificultades
-	    this.load.image('upload_image', 'assets/upload_image.png');
-	    this.load.image('how_to_play', 'assets/how_to_play.png');
+	    this.load.image('default_player', 'assets/default_player_es.png'); //titulos dificultades
+	    this.load.image('upload_image', 'assets/upload_image_es.png');
+	    this.load.image('how_to_play', 'assets/how_to_play_es.png');
 	    /*
 	    this.load.image('chupao', 'assets/chupao.png'); //titulos dificultades
 	    this.load.image('normalico', 'assets/normalico.png');
@@ -93,9 +93,9 @@ DudeVolley.Preloader.prototype = {
 	    this.load.spritesheet('movil_pika', 'assets/pika_arrow_120.png', 140, 120);
 
 	    //this.load.image('movil_jugar', 'assets/ajugar.png');
-	    this.load.image('movil_jugar', 'assets/play.png');
+	    this.load.image('movil_jugar', 'assets/play_es.png');
 	    //this.load.image('movil_volver_a_jugar', 'assets/volver_a_jugar.png');
-	    this.load.image('movil_volver_a_jugar', 'assets/play_again.png');
+	    this.load.image('movil_volver_a_jugar', 'assets/play_again_es.png');
 	    
 	    //this.load.image('movil_comoelegir', 'assets/texto_select.png');
 

@@ -114,6 +114,6 @@
 	};
 
 	</script>
-
+	<footer style="width:100%; text-align:center; font-size: 1.5vw;"><a href="mailto:jesusolmossanchez@gmail.com" style="color:#f5f823; text-decoration:none;">jesusolmossanchez@gmail.com</a> </footer>
 	</body>
 </html>
