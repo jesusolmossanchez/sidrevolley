@@ -1,5 +1,21 @@
 <?php 
+    session_start();
+    if ($_SESSION['suebeajax2'] === 1) {
+        echo "Ya lo has subido";
+        exit;
+    }
 
+    if($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
+      header('Location: http://jesusolmos.es');
+    }
+    /*
+    if(!@isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']=="http://projects.local/tuvolley/index.php"){
+      header('Location: http://jesusolmos.es');
+    }*/
+    if($_POST['token'] != $_SESSION['token']) {
+      header('Location: http://jesusolmos.es');
+    }
+    $token = $_POST["token"];
 class CircleCrop
 {
 
@@ -135,6 +151,7 @@ imagecopy($merged_image, $top_image, 265, 0, 0, 0, $targ_w, $targ_h);
 imagepng($merged_image, $merged_image2);
 
 echo $merged_image2;
+$_SESSION['suebeajax2'] = 1;
 
 //imagedestroy($dest);
 //imagedestroy($src);

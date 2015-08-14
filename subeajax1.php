@@ -1,4 +1,22 @@
 <?php
+  session_start();
+  if ($_SESSION['suebeajax1'] === 1) {
+    echo "Ya lo has subido";
+    exit;
+  }
+
+  if($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
+      header('Location: http://jesusolmos.es');
+  }
+  /*
+  if(!@isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']=="http://projects.local/tuvolley/index.php"){
+      header('Location: http://jesusolmos.es');
+  }*/
+  if($_POST['token'] != $_SESSION['token']) {
+      header('Location: http://jesusolmos.es');
+  }
+  $token = $_POST["token"];
+
 	$allowedExts = array("image/gif", "image/jpeg", "image/jpg", "image/png");
 	$temp = explode(".", $_FILES["fileToUpload"]["name"]);
 
@@ -54,6 +72,8 @@
       }
 
       move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], "img/" . $file_name);
+
+      $_SESSION['suebeajax1'] = 1;
 
 		}
 	}
@@ -121,6 +141,7 @@
     <input type="hidden" id="w" name="w" />
     <input type="hidden" id="h" name="h" />
     <input type="hidden" id="nombre" name="nombre" value="<?= $nombre;?>"/>
+    <input type="hidden" id="token" name="token" value="<?= $token;?>"/>
     <input type="hidden" id="extension" name="extension" value="<?= $extension;?>"/>
     <input id="click_imagen_cortada" type="submit" value="recortar" />
 </form>

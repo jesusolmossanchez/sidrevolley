@@ -1,5 +1,21 @@
 <?php
+	session_start();
+    if ($_SESSION['puntos_registrados'] === 1) {
+	    echo "Puntos ya registrados!!";
+	    exit;
+    }
 
+    if($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
+      header('Location: http://jesusolmos.es');
+    }
+    /*
+    if(!@isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']=="http://projects.local/tuvolley/index.php"){
+      header('Location: http://jesusolmos.es');
+    }*/
+    if($_POST['token'] != $_SESSION['token']) {
+      header('Location: http://jesusolmos.es');
+    }
+    $token = $_POST["token"];
 	$dif = intval($_POST['diferencia']);
 	$tiempo = intval($_POST['tiempo']);
 
@@ -31,6 +47,7 @@
 		$devuelve[] = $valor;
 	    
 	}
+	$_SESSION['puntos_registrados'] = 1;
 	$encoded = json_encode($devuelve);
 	print_r($encoded);
 

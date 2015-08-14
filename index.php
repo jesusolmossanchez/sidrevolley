@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	$token = md5(rand(1000,9999));
+	$_SESSION['token'] = $token;
+	$_SESSION['puntos_registrados'] = 0;
+	$_SESSION['suebeajax1'] = 0;
+	$_SESSION['suebeajax2'] = 0;
+	$_SESSION['winner_cambiado'] = 0;
+
+?>
 <!DOCTYPE HTML>
 <html style="margin:0 !important;">
 <head>
@@ -63,6 +73,7 @@
     		<img src="assets/sube.png" style="margin: -1vw 0 -1vw 2vw; width:15%;"></div>
     </label>
     <input type="file" name="fileToUpload" id="fileToUpload" style="display:none"><br/><br/>
+    <input type="hidden" name="token" id="token" value="<?=$token?>">
     <input id="inputsubefoto" type="submit" value="Aceptar" name="submit" style="display:none">
 </form>
 <div id="contiene_foto_subida" style="max-width:600px;">
@@ -75,6 +86,7 @@
 			<p id="puntos"></p>
 			<p id="envia_tus_puntos">Send  your  score:</p>
 			<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
+			<input type="hidden" name="token" id="token" value="<?=$token?>">
 			<button id="envia_tu_nombre"> Enviar </button> 
 		</form>
 		<ul id="contiene_clasificacion">
@@ -86,6 +98,7 @@
 
 window.onload = function() {
 
+	window.token = '<?php echo $token;?>';
 	//creo el objeto del juego
 	var game = new Phaser.Game(800, 685, Phaser.AUTO, 'gameContainer');
 

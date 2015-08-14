@@ -232,6 +232,7 @@ BasicGame.SubePlayer.prototype = {
 				e.preventDefault();
 				if (window.sube < 1){
 					window.sube = 1;
+
 					$.ajax({
 						url: "subeajax1.php", 
 						type: "POST",             

@@ -46,13 +46,13 @@ BasicGame.GameOver.prototype = {
 		//Inicializo la fisica del juego
 		/*
 		L = this.input.keyboard.addKey(Phaser.Keyboard.L);
-		ENTER = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 		PIKA1 = this.input.keyboard.addKey(Phaser.Keyboard.L);
 		ARRIBA = this.input.keyboard.addKey(Phaser.Keyboard.R);
 		ABAJO = this.input.keyboard.addKey(Phaser.Keyboard.F);
 		IZQUIERDA = this.input.keyboard.addKey(Phaser.Keyboard.D);
 		DERECHA = this.input.keyboard.addKey(Phaser.Keyboard.G);
 		ZETA = this.input.keyboard.addKey(Phaser.Keyboard.Z);*/
+		ENTER = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 		this.input.keyboard.removeKey(Phaser.Keyboard.D);
 		this.input.keyboard.removeKey(Phaser.Keyboard.R);
 		this.input.keyboard.removeKey(Phaser.Keyboard.F);
@@ -73,7 +73,8 @@ BasicGame.GameOver.prototype = {
 				resultado = "win";
 				if (rutajuagdor != false){
 					var post_data= {
-				        rutaplayer: rutajuagdor
+				        rutaplayer: rutajuagdor,
+				        token: window.token
 				    }
 					$.post("cambia_imagen_winner.php", post_data)
 						.done(function( data ) {
@@ -107,7 +108,8 @@ BasicGame.GameOver.prototype = {
 								        diferencia: diferencia,
 								        puntuacion: puntuacion,
 								        tiempo: tiempofinal,
-								        level: level
+								        level: level,
+								        token: window.token
 								    }
 					$.post( "registrapuntos.php", post_data)
 						.done(function( data ) {
@@ -223,13 +225,9 @@ BasicGame.GameOver.prototype = {
             this.perdedor.body.y = this.world.height-180;
         }
 		
-		if(PIKA1.isDown){
-			this.game.huertica_music.stop();
-	    	this.state.start('Preloader');
-	    } 
-	    if(ZETA.isDown){
-			this.game.huertica_music.stop();
-	    	this.state.start('Preloader');
+	    if(ENTER.isDown && !this.game.yaregistrado){
+			$("#envia_tu_nombre").click();
+			this.game.yaregistrado = true;
 	    }
 
 	    //this.game.input.holdRate = 600;
