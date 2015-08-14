@@ -17,6 +17,20 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="js/phaser.min.js"></script>
 	<script src="src/out.min.js"></script>
+	<!-- Sin minificar
+	<script src="js/Preloader.js"></script>
+	<script src="js/PreMainMenu.js"></script>
+    <script src="js/LevelMenu.js"></script>
+	<script src="js/SubePlayer.js"></script>
+	<script src="js/MainMenuOnePlayer.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/Game.js"></script>
+	<script src="js/GameOnePlayer.js"></script>
+	<script src="js/Entrenamiento.js"></script>
+	<script src="js/GameOver.js"></script>
+	<script src="js/Player.js"></script>
+	-->
+	
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="js/jquery.Jcrop.js"></script>
     <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />

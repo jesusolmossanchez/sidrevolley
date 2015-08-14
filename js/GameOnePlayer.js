@@ -404,7 +404,7 @@ BasicGame.GameOnePlayer.prototype = {
         if(this.pelota.body.position.x > 390){
             this.game.puntos_player1++;
             this.scoreText1.text = this.game.puntos_player1;
-            if (this.game.puntos_player1 >= 1){
+            if (this.game.puntos_player1 >= 10){
                 //////console.log("gameover");
                 
                 this.game.ganador = Player1.sprite;
