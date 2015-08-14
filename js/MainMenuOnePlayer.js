@@ -1,14 +1,15 @@
 
-BasicGame.MainMenuOnePlayer = function (game) {
+DudeVolley.MainMenuOnePlayer = function (game) {
 
 	this.music = null;
 	this.playButton = null;
 
 };
 
-BasicGame.MainMenuOnePlayer.prototype = {
+DudeVolley.MainMenuOnePlayer.prototype = {
 
 	preload: function (){
+		ga('send', 'pageview', '/MainMenuOnePlayer');
 		if (this.game.normalplayer){
 			this.load.spritesheet('player1','cpu_player/default_player.png',80,110)
 		}else{

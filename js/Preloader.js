@@ -1,5 +1,5 @@
 
-BasicGame.Preloader = function (game) {
+DudeVolley.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,11 +8,11 @@ BasicGame.Preloader = function (game) {
 
 };
 
-BasicGame.Preloader.prototype = {
+DudeVolley.Preloader.prototype = {
 
 	preload: function () {
 
-	
+		ga('send', 'pageview', '/Preloader');
 		//situo el titulo y la barra de carga
 		var titulo = this.cache.getImage('titulo');
 		this.background = this.add.sprite(this.world.centerX - titulo.width/2.0, 120, 'titulo');

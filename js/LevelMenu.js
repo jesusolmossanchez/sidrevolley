@@ -1,5 +1,5 @@
 
-BasicGame.LevelMenu = function (game) {
+DudeVolley.LevelMenu = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,7 +8,7 @@ BasicGame.LevelMenu = function (game) {
 
 };
 
-BasicGame.LevelMenu.prototype = {
+DudeVolley.LevelMenu.prototype = {
 
 
 	create: function () {

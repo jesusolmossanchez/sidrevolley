@@ -1,5 +1,5 @@
 
-BasicGame.PreMainMenu = function (game) {
+DudeVolley.PreMainMenu = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,7 +8,7 @@ BasicGame.PreMainMenu = function (game) {
 
 };
 
-BasicGame.PreMainMenu.prototype = {
+DudeVolley.PreMainMenu.prototype = {
 
 
 	create: function () {

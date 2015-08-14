@@ -1,5 +1,5 @@
 
-BasicGame.SubePlayer = function (game) {
+DudeVolley.SubePlayer = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,11 +8,11 @@ BasicGame.SubePlayer = function (game) {
 
 };
 
-BasicGame.SubePlayer.prototype = {
+DudeVolley.SubePlayer.prototype = {
 
 
 	create: function () {
-
+		ga('send', 'pageview', '/SubePlayer');
 		//situo las cosas en la pantalla
 		var titulo_estirado = this.cache.getImage('titulo_estirado');
 		this.titulo_estirado = this.add.sprite(this.world.centerX - titulo_estirado.width/2.0, 20, 'titulo_estirado');

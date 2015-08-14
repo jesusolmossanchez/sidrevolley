@@ -1,15 +1,15 @@
 
-BasicGame.GameOver = function (game) {
+DudeVolley.GameOver = function (game) {
 
 
 
 };
 
-BasicGame.GameOver.prototype = {
+DudeVolley.GameOver.prototype = {
 
 	create: function () {
 
-		
+			ga('send', 'pageview', '/GameOver');
 			var rutajuagdor = this.game.ruta_jugador;
 
 		
@@ -131,7 +131,7 @@ BasicGame.GameOver.prototype = {
 								$("#contiene_clasificacion").html($("#contiene_clasificacion").html()+"<dl><dt>"+this.nombre+"</dt><dd>"+this.puntuacion+"("+format+")</dd></dl>");
 							  	//use obj.id and obj.name here, for example:
 							});
-							//BasicGame.scale.refresh();
+							//DudeVolley.scale.refresh();
 					});
 				}
 			});

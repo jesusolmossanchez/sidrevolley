@@ -2,7 +2,7 @@
 
 
 
-BasicGame.Entrenamiento = function (game) {
+DudeVolley.Entrenamiento = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
@@ -28,9 +28,10 @@ BasicGame.Entrenamiento = function (game) {
 
 };
 
-BasicGame.Entrenamiento.prototype = {
+DudeVolley.Entrenamiento.prototype = {
 
     preload: function(){
+        ga('send', 'pageview', '/Entrenamiento');
         this.tip1 = this.add.sprite(20, 20, 'tip1');
         this.tip2 = this.add.sprite(220, 20, 'tip2');
         this.tip3 = this.add.sprite(420, 20, 'tip3');

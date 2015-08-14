@@ -1,14 +1,14 @@
-var BasicGame = {};
+var DudeVolley = {};
 
-BasicGame.Boot = function (game) {
+DudeVolley.Boot = function (game) {
     
 };
 
-BasicGame.Boot.prototype = {
+DudeVolley.Boot.prototype = {
 
     init: function () {
 
-
+        ga('send', 'pageview', '/Boot');
         //maximo de punteros(pongo un numero alto porque a veces se queda punki)
         this.input.maxPointers = 9;
 

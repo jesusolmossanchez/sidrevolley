@@ -2,7 +2,7 @@
 
 
 
-BasicGame.GameOnePlayer = function (game) {
+DudeVolley.GameOnePlayer = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
@@ -28,10 +28,10 @@ BasicGame.GameOnePlayer = function (game) {
 
 };
 
-BasicGame.GameOnePlayer.prototype = {
+DudeVolley.GameOnePlayer.prototype = {
 
     init: function () {
-
+        ga('send', 'pageview', '/GameOnePlayer');
          //Inicializo la fisica del juego
         this.physics.startSystem(Phaser.Physics.ARCADE);
 

@@ -81,16 +81,16 @@ window.onload = function() {
 	var game = new Phaser.Game(800, 700, Phaser.AUTO, 'gameContainer');
 
 	//añado las 'pantallas'
-	game.state.add('Boot', BasicGame.Boot);
-	game.state.add('Preloader', BasicGame.Preloader);
-	game.state.add('PreMainMenu', BasicGame.PreMainMenu);
-    game.state.add('LevelMenu', BasicGame.LevelMenu);
-	game.state.add('SubePlayer', BasicGame.SubePlayer);
-	game.state.add('MainMenuOnePlayer', BasicGame.MainMenuOnePlayer);
-	game.state.add('MainMenu', BasicGame.MainMenu);
-	game.state.add('Game', BasicGame.Game);
-	game.state.add('GameOnePlayer', BasicGame.GameOnePlayer);
-	game.state.add('GameOver', BasicGame.GameOver);
+	game.state.add('Boot', DudeVolley.Boot);
+	game.state.add('Preloader', DudeVolley.Preloader);
+	game.state.add('PreMainMenu', DudeVolley.PreMainMenu);
+    game.state.add('LevelMenu', DudeVolley.LevelMenu);
+	game.state.add('SubePlayer', DudeVolley.SubePlayer);
+	game.state.add('MainMenuOnePlayer', DudeVolley.MainMenuOnePlayer);
+	game.state.add('MainMenu', DudeVolley.MainMenu);
+	game.state.add('Game', DudeVolley.Game);
+	game.state.add('GameOnePlayer', DudeVolley.GameOnePlayer);
+	game.state.add('GameOver', DudeVolley.GameOver);
 
 	//empieza
 	game.state.start('Boot');

@@ -34,6 +34,16 @@
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="js/jquery.Jcrop.js"></script>
     <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+    <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-66368910-2', 'auto');
+		ga('send', 'pageview', '/Index');
+
+	</script>
 </head>
 
 <body style="background-color:rgb(0,0,0); margin:0 !important;">
@@ -85,17 +95,17 @@
 		var game = new Phaser.Game(800, 685, Phaser.AUTO, 'gameContainer');
 
 		//añado las 'pantallas'
-		game.state.add('Boot', BasicGame.Boot);
-		game.state.add('Preloader', BasicGame.Preloader);
-		game.state.add('PreMainMenu', BasicGame.PreMainMenu);
-	    game.state.add('LevelMenu', BasicGame.LevelMenu);
-		game.state.add('SubePlayer', BasicGame.SubePlayer);
-		game.state.add('MainMenuOnePlayer', BasicGame.MainMenuOnePlayer);
-		game.state.add('MainMenu', BasicGame.MainMenu);
-		game.state.add('Game', BasicGame.Game);
-		game.state.add('GameOnePlayer', BasicGame.GameOnePlayer);
-		game.state.add('Entrenamiento', BasicGame.Entrenamiento);
-		game.state.add('GameOver', BasicGame.GameOver);
+		game.state.add('Boot', DudeVolley.Boot);
+		game.state.add('Preloader', DudeVolley.Preloader);
+		game.state.add('PreMainMenu', DudeVolley.PreMainMenu);
+	    game.state.add('LevelMenu', DudeVolley.LevelMenu);
+		game.state.add('SubePlayer', DudeVolley.SubePlayer);
+		game.state.add('MainMenuOnePlayer', DudeVolley.MainMenuOnePlayer);
+		game.state.add('MainMenu', DudeVolley.MainMenu);
+		game.state.add('Game', DudeVolley.Game);
+		game.state.add('GameOnePlayer', DudeVolley.GameOnePlayer);
+		game.state.add('Entrenamiento', DudeVolley.Entrenamiento);
+		game.state.add('GameOver', DudeVolley.GameOver);
 
 		//empieza
 		game.state.start('Boot');
