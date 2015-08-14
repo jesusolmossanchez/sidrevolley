@@ -31,7 +31,12 @@ DudeVolley.GameOnePlayer = function (game) {
 DudeVolley.GameOnePlayer.prototype = {
 
     init: function () {
-        ga('send', 'pageview', '/GameOnePlayer');
+        if (this.game.normalplayer){
+            ga('send', 'pageview', '/GameDefaultPlayer');
+        }else{
+            ga('send', 'pageview', '/GameCustomPlayer');
+        }
+        
          //Inicializo la fisica del juego
         this.physics.startSystem(Phaser.Physics.ARCADE);
 

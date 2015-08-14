@@ -9,7 +9,7 @@ DudeVolley.MainMenuOnePlayer = function (game) {
 DudeVolley.MainMenuOnePlayer.prototype = {
 
 	preload: function (){
-		ga('send', 'pageview', '/MainMenuOnePlayer');
+		ga('send', 'pageview', '/FakeMenu');
 		if (this.game.normalplayer){
 			this.load.spritesheet('player1','cpu_player/default_player.png',80,110)
 		}else{

@@ -12,7 +12,7 @@ DudeVolley.SubePlayer.prototype = {
 
 
 	create: function () {
-		ga('send', 'pageview', '/SubePlayer');
+		ga('send', 'pageview', '/MenuJuego');
 		//situo las cosas en la pantalla
 		var titulo_estirado = this.cache.getImage('titulo_estirado');
 		this.titulo_estirado = this.add.sprite(this.world.centerX - titulo_estirado.width/2.0, 20, 'titulo_estirado');
