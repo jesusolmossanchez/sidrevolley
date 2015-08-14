@@ -36,9 +36,9 @@ BasicGame.MainMenuOnePlayer.prototype = {
 
 	create: function () {
 		//AUDIO
-		this.game.huertica_music =  this.game.add.audio('huertica_sound');
-		this.game.huertica_music.play("",0,0.7,true);
- 		this.selected_sound =  this.game.add.audio('select_sound');
+		//this.game.huertica_music =  this.game.add.audio('huertica_sound');
+		//this.game.huertica_music.play("",0,0.7,true);
+ 		//this.selected_sound =  this.game.add.audio('select_sound');
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 		L = this.input.keyboard.addKey(Phaser.Keyboard.L);

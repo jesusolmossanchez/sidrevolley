@@ -18,18 +18,18 @@ BasicGame.SubePlayer.prototype = {
 		this.titulo_estirado = this.add.sprite(this.world.centerX - titulo_estirado.width/2.0, 20, 'titulo_estirado');
 		//this.background = this.add.sprite(this.world.centerX - titulo.width/2.0, 120, 'titulo_saltolinea');
 
-		var chupao = this.cache.getImage('chupao');
+		var default_player = this.cache.getImage('default_player');
 		var jugadores_seleccionado = this.cache.getImage('jugadores_seleccionado');
 
 		//aqui pongo seleccionar imagen o subir una
-		this.chupao = this.add.sprite(this.world.centerX - chupao.width/2.0, 150, 'default_player');
-		this.normalico = this.add.sprite(this.world.centerX - chupao.width/2.0, 250, 'upload_image');
-		this.how_to_play = this.add.sprite(this.world.centerX - chupao.width/2.0, 350, 'how_to_play');
-		this.chupao.inputEnabled = true;
-		this.normalico.inputEnabled = true;
+		this.default_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 150, 'default_player');
+		this.upload_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 250, 'upload_image');
+		this.how_to_play = this.add.sprite(this.world.centerX - default_player.width/2.0, 350, 'how_to_play');
+		this.default_player.inputEnabled = true;
+		this.upload_player.inputEnabled = true;
 		this.how_to_play.inputEnabled = true;
-		this.chupao.input.sprite.events.onInputDown.add(this.empieza_default, this);
-		this.normalico.input.sprite.events.onInputDown.add(this.empieza_upload, this);
+		this.default_player.input.sprite.events.onInputDown.add(this.empieza_default, this);
+		this.upload_player.input.sprite.events.onInputDown.add(this.empieza_upload, this);
 		this.how_to_play.input.sprite.events.onInputDown.add(this.empieza_how, this);
 
 		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 150, 'jugadores_seleccionado');

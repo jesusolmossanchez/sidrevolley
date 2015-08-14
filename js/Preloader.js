@@ -51,33 +51,42 @@ BasicGame.Preloader.prototype = {
 	    this.load.image('default_player', 'assets/default_player.png'); //titulos dificultades
 	    this.load.image('upload_image', 'assets/upload_image.png');
 	    this.load.image('how_to_play', 'assets/how_to_play.png');
+	    /*
 	    this.load.image('chupao', 'assets/chupao.png'); //titulos dificultades
 	    this.load.image('normalico', 'assets/normalico.png');
 	    this.load.image('jodio', 'assets/jodio.png');
+	    */
 	    
-	    //this.load.image('select_dificultad', 'assets/select_dificultad.png');
+	    this.load.image('select_dificultad', 'assets/select_dificultad.png');
 	    this.load.image('select_dificultad', 'assets/select.png');
 	    this.load.image('movil_select_dificultad', 'assets/movil_select_dificultad.png');
 
-
+/*
 	    this.load.image('movimientos1', 'assets/movimientos1.png');
 	    this.load.image('movimientos2', 'assets/movimientos2.png');
 	    this.load.image('movimientos_oneplayer', 'assets/movimientos_oneplayer.png');
 	    this.load.image('movimientos2', 'assets/movimientos2.png');
+*/
+
 	    this.load.image('pelota', 'assets/new_pelota.png');
 	    this.load.image('explota', 'assets/explota.png');
+
+/*
 	    this.load.image('all_players', 'assets/all_players2.png');
-
-
 	    this.load.image('select_player1', 'assets/select_player1.png', 80, 80);
 	    this.load.image('select_player2', 'assets/select_player2.png', 80, 80);
-	    /*
+	    
 	    this.load.spritesheet('mostri', rutajugador, 80, 80);
-		*/
+*/
+
+
+
+		//CPU_PLAYER IMAGEN
 	    this.load.spritesheet('cpu', 'cpu_player/cpu_player.png', 80, 110);
 
+
+
 	    //botones mobile
-	    
 	    this.load.spritesheet('movil_izq', 'assets/izq_arrow_120.png', 140, 120);
 	    this.load.spritesheet('movil_der', 'assets/der_arrow_120.png', 140, 120);
 	    this.load.spritesheet('movil_arr', 'assets/arr_arrow_120.png', 140, 120);
@@ -87,17 +96,19 @@ BasicGame.Preloader.prototype = {
 	    this.load.image('movil_jugar', 'assets/play.png');
 	    //this.load.image('movil_volver_a_jugar', 'assets/volver_a_jugar.png');
 	    this.load.image('movil_volver_a_jugar', 'assets/play_again.png');
-	    this.load.image('movil_comoelegir', 'assets/texto_select.png');
+	    
+	    //this.load.image('movil_comoelegir', 'assets/texto_select.png');
 
 
 	    //sonidos
-
+	    //desactivo los sonidos!!??
+	    /*
 	    this.load.audio('acho',['assets/acho2.ogg','assets/acho2.mp3']);
 	    this.load.audio('select_sound',['assets/select.ogg','assets/select.mp3']);
 	    this.load.audio('explosion_sound',['assets/explosion_sound.ogg','assets/explosion_sound.mp3']);
 	    this.load.audio('huertica_sound',['assets/musica1.ogg','assets/musica1.mp3']);
-		
 		this.huertica_music =  this.game.add.audio('huertica_sound');
+		*/
 
 		//punterooos
         this.game.input.addPointer();

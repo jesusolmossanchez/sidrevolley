@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.eot" />
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.eot?#iefix" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
 	<script src="js/phaser.min.js"></script>
 	<script src="js/Boot.js"></script>
 	<script src="js/Preloader.js"></script>
@@ -25,7 +26,9 @@
 	<script src="js/GameOnePlayer.js"></script>
 	<script src="js/Entrenamiento.js"></script>
 	<script src="js/GameOver.js"></script>
+	<script src="js/Player.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	
 
     <script src="js/jquery.Jcrop.js"></script>
     
