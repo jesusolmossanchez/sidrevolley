@@ -26,6 +26,10 @@ canvas{
 	margin:auto;
 }
 
+.jcrop-holder div{
+    border-radius: 50%;
+}
+
 #explica_sube > span{
     margin: 0 1vw;
 }
