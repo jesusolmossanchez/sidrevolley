@@ -30,8 +30,6 @@ BasicGame.GameOnePlayer = function (game) {
 
 BasicGame.GameOnePlayer.prototype = {
 
-    
-
     init: function () {
 
          //Inicializo la fisica del juego
@@ -112,36 +110,38 @@ BasicGame.GameOnePlayer.prototype = {
 
 
         //AUDIO
-        this.acho_audio2 =  this.game.add.audio('acho');
-        this.explosion_sound2 =  this.game.add.audio('explosion_sound');
+        //this.acho_audio2 =  this.game.add.audio('acho');
+        //this.explosion_sound2 =  this.game.add.audio('explosion_sound');
 
 
         //Jugadores
-        this.game.player = this.add.sprite(32, this.world.height - 250, 'player1');
-        this.game.player.anchor.setTo(0.5, 0.5);
+        //this.game.player = this.add.sprite(32, this.world.height - 250, 'player1');
+        Player1 = new Player('player1', this, "soy_yo");
 
-        this.game.player2 = this.add.sprite(this.world.width - 52, this.world.height - 250, 'cpu');
-        this.game.player2.anchor.setTo(0.5, 0.5);
+        Player2 = new Player('cpu', this, "la_maquina");
+        
+        
+
+        //Player2.sprite = this.add.sprite(this.world.width - 52, this.world.height - 250, 'cpu');
+        //Player2.sprite.anchor.setTo(0.5, 0.5);
 
 
         this.pelota = this.add.sprite(32, 0, 'pelota');
         this.pelota.anchor.setTo(0.5, 0.5);
 
         //Fisica de jugadores y this.pelota
-        this.physics.arcade.enable(this.game.player);
-        this.physics.arcade.enable(this.game.player2);
+        
+        //this.physics.arcade.enable(Player2.sprite);
         this.physics.arcade.enable(this.pelota);
 
 
 
         //Fisica del jugador
-        this.game.player.body.bounce.y = 0;
-        this.game.player.body.gravity.y = 800*this.game.factor_slow_gravity;
-        this.game.player.body.collideWorldBounds = true;
+        
 
-        this.game.player2.body.bounce.y = 0;
-        this.game.player2.body.gravity.y = 800*this.game.factor_slow_gravity;
-        this.game.player2.body.collideWorldBounds = true;
+        //Player2.sprite.body.bounce.y = 0;
+        //Player2.sprite.body.gravity.y = 800*this.game.factor_slow_gravity;
+        //Player2.sprite.body.collideWorldBounds = true;
 
         //Fisica de la this.pelota
         this.pelota.body.bounce.y = 0.9;
@@ -151,12 +151,7 @@ BasicGame.GameOnePlayer.prototype = {
         this.pelota.body.deltaMax = (400,400)
 
         //animaciones de movimiento
-        this.game.player.animations.add('semueve', [0, 1], 7, true);
-        this.game.player.animations.add('senfada', [3], 5, true);
-        this.game.player.animations.add('salta', [2], 5, true);
-        this.game.player2.animations.add('senfada', [0], 5, true);
-        this.game.player2.animations.add('semueve', [2, 3], 7, true);
-        this.game.player2.animations.add('salta', [1], 5, true);
+        
 
         //  The score
         //this.scoreText1 = this.add.text(16, 16, '0', { font: '44px Age', fill: "#eaff02", align: "center" });
@@ -179,25 +174,6 @@ BasicGame.GameOnePlayer.prototype = {
 
         this.enpausa = false;
 
-        this.game.player.enfadao = false;
-        this.game.player.enfadao_time = this.time.now;
-        this.game.player2.enfadao = false;
-        this.game.player2.enfadao_time = this.time.now;
-
-        this.game.player.tiempo_gorrino = this.time.now;
-        this.game.player.hace_gorrino = false;
-        this.game.player.para_gorrino = false;
-  
-        this.game.player2.tiempo_gorrino = this.time.now;
-        this.game.player2.hace_gorrino = false;
-        this.game.player2.para_gorrino = false;
-
-        this.game.player.limite_izquierda = 0;
-        this.game.player.limite_derecha = 380;
-
-        this.game.player2.limite_izquierda = 410;
-        this.game.player2.limite_derecha = 800;
-
         this.enunratico = this.time.now;
         this.quien_empieza = "uno";
         this.punto = false;
@@ -205,16 +181,11 @@ BasicGame.GameOnePlayer.prototype = {
         this.dondecae = 0;
         this.cuandocae = 0;
 
-
-        
         this.muevederecha = false;
         this.mueveizquierda = false;
         this.muevearriba = false;
         this.mueveabajo = false;
         this.hace_gorrino_tap = false;
-
-        this.game.player2.frame = 1;
-        this.game.player.frame = 1;
 
         this.game.hasperdio = false;
         this.game.unplayer = true;
@@ -280,31 +251,41 @@ BasicGame.GameOnePlayer.prototype = {
 
 
     update: function () {
+        if (typeof Player2 !== 'undefined'){
+            if (Player2.sprite.body.y > this.world.height-250){
 
+                Player2.sprite.salta = false;
 
-        if (this.game.player.body.y > this.world.height-250){
-
-            this.game.player.salta = false;
+            }
+            this.sombra2.position.set(Player2.sprite.body.position.x, this.world.height - 144);
+            this.physics.arcade.collide(this.pelota, Player2.sprite, this.pika_maquina, null, this);
+            this.physics.arcade.collide(Player2.sprite, platforms);
         }
-        if (this.game.player2.body.y > this.world.height-250){
 
-            this.game.player2.salta = false;
+        if (typeof Player1 !== 'undefined'){
+            if (Player1.sprite.body.y > this.world.height-250){
+
+                Player1.sprite.salta = false;
+            }
+            this.sombra1.position.set(Player1.sprite.body.position.x, this.world.height - 144);
+            this.physics.arcade.collide(this.pelota, Player1.sprite, this.pika, null, this);
+            this.physics.arcade.collide(Player1.sprite, platforms);
         }
+        
+        
 
-        this.sombra1.position.set(this.game.player.body.position.x, this.world.height - 144);
-        this.sombra2.position.set(this.game.player2.body.position.x, this.world.height - 144);
+        
         this.sombra_pelota.position.set(this.pelota.body.position.x, this.world.height - 144);
 
 
         this.pelota.angle += this.pelota.body.velocity.x/20;
         //choque de this.pelota con jugador
-        this.physics.arcade.collide(this.pelota, this.game.player, this.pika, null, this);
+        
         //pruebas para el cpu player
-        this.physics.arcade.collide(this.pelota, this.game.player2, this.pika3, null, this);
+        
         
         //choque de jugadores con cosas
-        this.physics.arcade.collide(this.game.player, platforms);
-        this.physics.arcade.collide(this.game.player2, platforms);
+        
 
         //choque de this.pelota con cosas
         this.physics.arcade.collide(this.pelota, platforms);
@@ -322,52 +303,60 @@ BasicGame.GameOnePlayer.prototype = {
         }
         else{
 
-            //Reseteo gorrino1
-            if(this.time.now > (this.game.player.tiempo_gorrino - 100)){
-                this.game.player.body.velocity.x = 0;
-                this.game.player.body.rotation = 0;
-                this.game.player.hace_gorrino = false;
-                //this.hace_gorrino_tap = false;
-            }
-
-            if(this.time.now > (this.game.player.tiempo_gorrino+100)){
-                this.game.player.para_gorrino = false;
-            }
-
-            //MOVIMIENTOS PLAYER1
-            if(superpika.isDown || this.hace_gorrino_tap || superpika2.isDown){
-                if (!this.game.player.body.touching.down && !this.game.player.para_gorrino){
-                    this.game.player.enfadao = true;
-                    this.game.player.animations.play('senfada');
-                    this.game.player.enfadao_time = this.time.now + 500;
+            
+            if (typeof Player1 !== 'undefined'){
+                //Reseteo gorrino1
+                if(this.time.now > (Player1.sprite.tiempo_gorrino - 100)){
+                    Player1.sprite.body.velocity.x = 0;
+                    Player1.sprite.body.rotation = 0;
+                    Player1.sprite.hace_gorrino = false;
+                    //this.hace_gorrino_tap = false;
                 }
-                else if (!this.game.player.para_gorrino){
-                    this.game.player.hace_gorrino=true;
-                    this.game.player.tiempo_gorrino = this.time.now + 400;
+
+                if(this.time.now > (Player1.sprite.tiempo_gorrino+100)){
+                    Player1.sprite.para_gorrino = false;
+                }
+
+                //MOVIMIENTOS PLAYER1
+                if(superpika.isDown || this.hace_gorrino_tap || superpika2.isDown){
+                    if (!Player1.sprite.body.touching.down && !Player1.sprite.para_gorrino){
+                        Player1.sprite.enfadao = true;
+                        Player1.sprite.animations.play('senfada');
+                        Player1.sprite.enfadao_time = this.time.now + 500;
+                    }
+                    else if (!Player1.sprite.para_gorrino){
+                        Player1.sprite.hace_gorrino=true;
+                        Player1.sprite.tiempo_gorrino = this.time.now + 400;
+                    }
+                }
+
+                if (cursors.left.isDown || this.mueveizquierda){
+                    Player1.mueve("izquierda");
+                }
+                else if(cursors.right.isDown || this.muevederecha){
+                    Player1.mueve("derecha");
+                }
+                else{
+                    Player1.mueve("parao");
+                }
+
+                if (cursors.up.isDown || this.muevearriba){
+                    Player1.mueve("arriba");
                 }
             }
 
-            if (cursors.left.isDown || this.mueveizquierda){
-                this.mueve("izquierda",this.game.player);
-            }
-            else if(cursors.right.isDown || this.muevederecha){
-                this.mueve("derecha",this.game.player);
-            }
-            else{
-                this.mueve("parao",this.game.player);
-            }
 
-            if (cursors.up.isDown || this.muevearriba){
-                this.mueve("arriba",this.game.player);
-            }
+            if (typeof Player2 !== 'undefined'){
+                //Reseteo player2
+                if(this.time.now > Player2.sprite.tiempo_gorrino){
+                    Player2.sprite.body.velocity.x = 0;
+                    Player2.sprite.body.rotation = 0;
+                    Player2.sprite.hace_gorrino = false;
+                }
+                this.procesa_movimientos_maquina();
 
-
-            //Reseteo player2
-            if(this.time.now > this.game.player2.tiempo_gorrino){
-                this.game.player2.body.velocity.x = 0;
-                this.game.player2.body.rotation = 0;
-                this.game.player2.hace_gorrino = false;
             }
+            
 
             //MOVIMIENTO PLAYER2
             /*
@@ -379,11 +368,10 @@ BasicGame.GameOnePlayer.prototype = {
                 this.nocontroles = 0;
             }
             */
-            this.procesa_movimientos_maquina();
 
 
 
-            if(this.pelota.body.position.y > this.world.height-185){
+            if(this.pelota.body.position.y > this.world.height-185 && (typeof Player2 !== 'undefined')){
                 //LA PELOTA TOCA EL SUELO
                 this.procesapunto();
             }
@@ -404,12 +392,12 @@ BasicGame.GameOnePlayer.prototype = {
 
     procesapunto: function (pointer) {
 
-        this.explosion_sound2.play("",0,0.5);
+        //this.explosion_sound2.play("",0,0.5);
         this.explota = this.add.sprite(this.pelota.body.position.x, this.pelota.body.position.y+5, 'explota');
-        this.game.player.body.velocity.y = this.game.player.body.velocity.y * 0.2;
-        this.game.player2.body.velocity.y = this.game.player2.body.velocity.y * 0.2;
-        this.game.player.body.velocity.x = this.game.player.body.velocity.x * 0.2;
-        this.game.player2.body.velocity.x = this.game.player2.body.velocity.x * 0.2;
+        Player1.sprite.body.velocity.y = Player1.sprite.body.velocity.y * 0.2;
+        Player2.sprite.body.velocity.y = Player2.sprite.body.velocity.y * 0.2;
+        Player1.sprite.body.velocity.x = Player1.sprite.body.velocity.x * 0.2;
+        Player2.sprite.body.velocity.x = Player2.sprite.body.velocity.x * 0.2;
         this.pelota.body.velocity.y = this.pelota.body.velocity.y * 0.2;
         this.pelota.body.velocity.x = this.pelota.body.velocity.x * 0.2;
         this.pelota.body.gravity.y = this.pelota.body.gravity.y*0.4*this.game.factor_slow_gravity;
@@ -419,10 +407,10 @@ BasicGame.GameOnePlayer.prototype = {
             if (this.game.puntos_player1 >= 10){
                 //////console.log("gameover");
                 
-                this.game.ganador = this.game.player;
-                this.game.perdedor = this.game.player2;
+                this.game.ganador = Player1.sprite;
+                this.game.perdedor = Player2.sprite;
                 //this.world.remove(this.game.player);
-                //this.world.remove(this.game.player2);
+                //this.world.remove(Player2.sprite);
 
                 this.state.start('GameOver');
             }
@@ -444,11 +432,11 @@ BasicGame.GameOnePlayer.prototype = {
             //this.game.world.worldAlpha = 0.3;
             if (this.game.puntos_player2 >= 10){
                 //////console.log("gameover");
-                this.game.ganador = this.game.player2;
-                this.game.perdedor = this.game.player;
+                this.game.ganador = Player2.sprite;
+                this.game.perdedor = Player1.sprite;
                 this.game.hasperdio = true;
                 //this.world.remove(this.game.player);
-                //this.world.remove(this.game.player2);
+                //this.world.remove(Player2.sprite);
                 this.state.start('GameOver');
             }
             tiempo_punto = this.time.now;
@@ -509,27 +497,27 @@ BasicGame.GameOnePlayer.prototype = {
         //si cae en mi campo
         if(this.dondecae > 360){
             //si cae a mi izquierda, me muevo pallá
-            if(this.dondecae<this.game.player2.position.x && !this.game.player2.hace_gorrino){
-                this.game.player2.body.velocity.x = -cuantocorre*this.game.factor_slow_velocity;
-                if (this.time.now > this.game.player2.enfadao_time && this.game.player2.body.velocity.x != 0){
-                    this.game.player2.animations.play('semueve');
+            if(this.dondecae<Player2.sprite.position.x && !Player2.sprite.hace_gorrino){
+                Player2.sprite.body.velocity.x = -cuantocorre*this.game.factor_slow_velocity;
+                if (this.time.now > Player2.sprite.enfadao_time && Player2.sprite.body.velocity.x != 0){
+                    Player2.sprite.animations.play('semueve');
                 }
             }
             //si cae a mi derecha, me muevo palla
             else{
-                if (!this.game.player2.hace_gorrino){
-                    this.game.player2.body.velocity.x = cuantocorre*this.game.factor_slow_velocity;
-                    if (this.time.now > this.game.player2.enfadao_time && this.game.player2.body.velocity.x != 0){
-                        this.game.player2.animations.play('semueve');
+                if (!Player2.sprite.hace_gorrino){
+                    Player2.sprite.body.velocity.x = cuantocorre*this.game.factor_slow_velocity;
+                    if (this.time.now > Player2.sprite.enfadao_time && Player2.sprite.body.velocity.x != 0){
+                        Player2.sprite.animations.play('semueve');
                     }
                 }
             }
             //si va a caer cerca, salto y me enfado
-            if(this.dondecae-this.game.player2.position.x < 70 && x>440 && (this.game.player2.position.y > this.world.height-200) && (Vx<120&&Vx>-120) && (this.pelota.position.y<this.world.height-300)){
-                this.game.player2.body.velocity.y = -550*this.game.factor_slow_velocity;
-                this.game.player2.enfadao = true;
-                this.game.player2.animations.play('senfada');
-                this.game.player2.enfadao_time = this.time.now + cuanto_tiempo_enfadao;
+            if(this.dondecae-Player2.sprite.position.x < 70 && x>440 && (Player2.sprite.position.y > this.world.height-200) && (Vx<120&&Vx>-120) && (this.pelota.position.y<this.world.height-300)){
+                Player2.sprite.body.velocity.y = -550*this.game.factor_slow_velocity;
+                Player2.sprite.enfadao = true;
+                Player2.sprite.animations.play('senfada');
+                Player2.sprite.enfadao_time = this.time.now + cuanto_tiempo_enfadao;
 
             }
 
@@ -537,31 +525,31 @@ BasicGame.GameOnePlayer.prototype = {
         }
         else{
             //paradico si no cae en mi campo
-            this.game.player2.animations.stop();
-            this.game.player2.frame = 3;
+            Player2.sprite.animations.stop();
+            Player2.sprite.frame = 3;
         }
 
 
         //a veces no hay donde cae y la lia la maquina, jejej
         if (this.game.level != 0){
             if(H<200){
-                if(this.dondecae<this.game.player2.position.x){
-                    if(this.game.player2.position.x - this.dondecae > 130 && x>440 && !this.game.player2.hace_gorrino){
+                if(this.dondecae<Player2.sprite.position.x){
+                    if(Player2.sprite.position.x - this.dondecae > 130 && x>440 && !Player2.sprite.hace_gorrino){
                         //this.acho_audio2.play();
-                        this.game.player2.body.velocity.x = -cuantocorre_gorrino*this.game.factor_slow_velocity;
-                        this.game.player2.body.rotation = -90;
-                        this.game.player2.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
-                        this.game.player2.hace_gorrino=true;
+                        Player2.sprite.body.velocity.x = -cuantocorre_gorrino*this.game.factor_slow_velocity;
+                        Player2.sprite.body.rotation = -90;
+                        Player2.sprite.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
+                        Player2.sprite.hace_gorrino=true;
                     }
 
                 }
                 else{
-                    if(this.dondecae-this.game.player2.position.x > 130 && x>440 && !this.game.player2.hace_gorrino){
+                    if(this.dondecae-Player2.sprite.position.x > 130 && x>440 && !Player2.sprite.hace_gorrino){
                         //this.acho_audio2.play();
-                        this.game.player2.body.velocity.x = cuantocorre_gorrino*this.game.factor_slow_velocity;
-                        this.game.player2.body.rotation = 90;
-                        this.game.player2.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
-                        this.game.player2.hace_gorrino=true;
+                        Player2.sprite.body.velocity.x = cuantocorre_gorrino*this.game.factor_slow_velocity;
+                        Player2.sprite.body.rotation = 90;
+                        Player2.sprite.tiempo_gorrino = this.time.now + cuanto_tiempo_gorrino;
+                        Player2.sprite.hace_gorrino=true;
                     }
 
                 }
@@ -571,53 +559,6 @@ BasicGame.GameOnePlayer.prototype = {
 
         
         
-
-    },
-
-    mueve: function (adonde, quien) {
-        if(quien.hace_gorrino){
-            if (adonde == "izquierda" && quien.body.touching.down && !quien.para_gorrino){
-                this.acho_audio2.play("",0,0.3);
-                quien.body.velocity.x = -400*this.game.factor_slow_velocity;
-                quien.body.rotation = -90;
-                quien.para_gorrino = true;
-            }
-            else if (adonde == "derecha" && quien.body.touching.down && !quien.para_gorrino){
-                this.acho_audio2.play("",0,0.3);
-                quien.body.velocity.x = 400*this.game.factor_slow_velocity;
-                quien.body.rotation = 90;
-                quien.para_gorrino = true;
-            }
-        }
-        else{
-            if (adonde == "izquierda" && quien.position.x > quien.limite_izquierda){
-                quien.body.velocity.x = -150*this.game.factor_slow_velocity;
-                if (this.time.now > quien.enfadao_time && this.game.player.salta != true){
-                    quien.animations.play('semueve');
-                }
-            }
-            else if (adonde == "derecha" && quien.position.x < quien.limite_derecha){
-                quien.body.velocity.x = 150*this.game.factor_slow_velocity;
-                if (this.time.now > quien.enfadao_time && this.game.player.salta != true){
-                    quien.animations.play('semueve');
-                }
-            }
-            else
-            {
-                if (adonde == "parao" && this.time.now > quien.enfadao_time && this.game.player.salta != true){
-                    quien.animations.stop();
-                    quien.frame = 0;
-                }
-            }
-
-            if(adonde == "arriba" && !quien.hace_gorrino && quien.body.touching.down){
-                quien.body.velocity.y = -550*this.game.factor_slow_velocity;
-                this.game.player.salta = true;
-                quien.animations.play('salta');
-                
-            }
-
-        }
 
     },
 
@@ -631,13 +572,13 @@ BasicGame.GameOnePlayer.prototype = {
         this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
         //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
         pos_pelota = this.pelota.body.position.x;
-        pos_player = this.game.player.body.position.x;
+        pos_player = Player1.sprite.body.position.x;
         diferencia = pos_pelota - pos_player;
         v_x_pelota = this.pelota.body.velocity.x;
         v_y_pelota = this.pelota.body.velocity.y;
         this.pelota.body.velocity.x = diferencia*3;
-        if (this.time.now < this.game.player.enfadao_time && this.game.player.enfadao){
-            this.acho_audio2.play("",0,0.3);
+        if (this.time.now < Player1.sprite.enfadao_time && Player1.sprite.enfadao){
+            //this.acho_audio2.play("",0,0.3);
 
 
             if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
@@ -645,7 +586,7 @@ BasicGame.GameOnePlayer.prototype = {
             {
                 this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
                 this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
             }
             else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
                 && (!cursors.down.isDown && !this.mueveabajo)){
@@ -688,7 +629,7 @@ BasicGame.GameOnePlayer.prototype = {
     },
 
 
-    pika3: function () {
+    pika_maquina: function () {
         if (this.punto){
             return true;
         }
@@ -709,19 +650,19 @@ BasicGame.GameOnePlayer.prototype = {
         this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
         this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
         pos_pelota = this.pelota.body.position.x;
-        pos_player = this.game.player2.body.position.x;
+        pos_player = Player2.sprite.body.position.x;
         diferencia = pos_pelota - pos_player;
         v_x_pelota = this.pelota.body.velocity.x;
         v_y_pelota = this.pelota.body.velocity.y;
         this.pelota.body.velocity.x = diferencia*3;
-        if (this.time.now < this.game.player2.enfadao_time && this.game.player2.enfadao){
+        if (this.time.now < Player2.sprite.enfadao_time && Player2.sprite.enfadao){
             //this.acho_audio2.play();
            quehago = Math.floor(Math.random() * 4);
            if (quehago == 0)
             {
                 this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
                 this.pelota.body.velocity.x = -800*this.factor_facilidad_x*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.factor_facilidad_x*this.game.factor_slow_gravity;
+                this.pelota.body.gravity.y = 1500*this.factor_facilidad_x*this.game.factor_slow_gravity;
             }
             else if(quehago == 1){
                 this.pelota.body.velocity.y = -800*this.factor_facilidad_y*this.game.factor_slow_velocity;
@@ -738,39 +679,23 @@ BasicGame.GameOnePlayer.prototype = {
                 this.pelota.body.velocity.x = -1000*this.factor_facilidad_x*this.game.factor_slow_velocity;
                 this.pelota.body.gravity.y = 1400*this.factor_facilidad_x*this.game.factor_slow_gravity;
             }
-            /*
-            else if(!cursors.right.isDown && !cursors.left.isDown && !cursors.up.isDown && cursors.down.isDown){
-                this.pelota.body.velocity.y = 800;
-                this.pelota.body.velocity.x = -300;
-                this.pelota.body.gravity.y = 1400;
-            }
-            else if(!cursors.right.isDown && !cursors.left.isDown && !cursors.up.isDown && !cursors.down.isDown){
-                this.pelota.body.velocity.y = -100;
-                this.pelota.body.velocity.x = -300;
-                this.pelota.body.gravity.y = 1400;
-            }
-            else if(!cursors.right.isDown && !cursors.left.isDown && cursors.up.isDown && !cursors.down.isDown){
-                this.pelota.body.velocity.y = -1000;
-                this.pelota.body.velocity.x = -300;
-                this.pelota.body.gravity.y = 1400;
-            }*/
         }
     },
 
     empieza: function (quien) {
         //////console.log("cocotu")
-        this.game.player2.frame = 1;
-        this.game.player.frame = 1;
+        Player2.sprite.frame = 1;
+        Player1.sprite.frame = 1;
         this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
-        this.game.player.body.position.x = 32;
-        this.game.player.body.position.y = this.world.height - 350;
-        this.game.player.body.velocity.x = 0;
-        this.game.player.body.velocity.y = 0;
+        Player1.sprite.body.position.x = 32;
+        Player1.sprite.body.position.y = this.world.height - 350;
+        Player1.sprite.body.velocity.x = 0;
+        Player1.sprite.body.velocity.y = 0;
 
-        this.game.player2.body.position.x = this.world.width - 52;
-        this.game.player2.body.position.y = this.world.height - 350;
-        this.game.player2.body.velocity.x = 0;
-        this.game.player2.body.velocity.y = 0;
+        Player2.sprite.body.position.x = this.world.width - 52;
+        Player2.sprite.body.position.y = this.world.height - 350;
+        Player2.sprite.body.velocity.x = 0;
+        Player2.sprite.body.velocity.y = 0;
 
         this.pelota.body.position.y = 0;
         this.pelota.body.velocity.x = 0;
@@ -784,3 +709,5 @@ BasicGame.GameOnePlayer.prototype = {
     }
 
 };
+
+

@@ -4,10 +4,6 @@
 	<meta charset="UTF-8" />
 	<title>Dude Volley</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.woff" />
-	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.svg#Age" />
-	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.eot" />
-	<link rel="stylesheet" type="text/css" href="fonts/Age.ttf.eot?#iefix" />
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.woff" />
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.svg#ArcadeClassic" />
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.eot" />
@@ -25,7 +21,9 @@
 	<script src="js/GameOnePlayer.js"></script>
 	<script src="js/Entrenamiento.js"></script>
 	<script src="js/GameOver.js"></script>
+	<script src="js/Player.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	
 
     <script src="js/jquery.Jcrop.js"></script>
     
