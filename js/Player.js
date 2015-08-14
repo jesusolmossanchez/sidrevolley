@@ -73,6 +73,7 @@ var Player = function(ruta, juego, id) {
             {
                 if (adonde == "parao" && juego.time.now > this.sprite.enfadao_time && Player1.sprite.salta != true){
                     this.sprite.animations.stop();
+                    this.sprite.body.velocity.x = 0;
                     this.sprite.frame = 0;
                 }
             }

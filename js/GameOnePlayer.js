@@ -58,7 +58,6 @@ BasicGame.GameOnePlayer.prototype = {
 
         function onSaMovio(data) {
             if (data.id !== Player1.id){
-            console.log(data)
                 //el otro se mueve y lo muevo
                 if (data.dir == "derecha"){
                     OTROPLAYER.mueve("derecha");
@@ -313,6 +312,7 @@ BasicGame.GameOnePlayer.prototype = {
 
 
     update: function () {
+
         if (typeof Player2 !== 'undefined'){
             if (Player2.sprite.body.y > this.world.height-250){
 
@@ -374,23 +374,24 @@ BasicGame.GameOnePlayer.prototype = {
         }
         else{
 
-            if (typeof OTROPLAYER !== 'undefined'){ 
+            if (typeof OTROPLAYER !== 'undefined'){
                 //Reseteo gorrino1
                 if(this.time.now > (OTROPLAYER.sprite.tiempo_gorrino - 100)){
-                    OTROPLAYER.sprite.body.velocity.x = 0;
+                    //OTROPLAYER.sprite.body.velocity.x = OTROPLAYER.sprite.body.velocity.x/2;
                     OTROPLAYER.sprite.body.rotation = 0;
                     OTROPLAYER.sprite.hace_gorrino = false;
                     //this.hace_gorrino_tap = false;
                 }
 
-                if(this.time.now > (OTROPLAYER.sprite.tiempo_gorrino+100)){
+                if(this.time.now > (Player1.sprite.tiempo_gorrino+100)){
                     OTROPLAYER.sprite.para_gorrino = false;
                 }
             }
+
             if (typeof Player1 !== 'undefined'){
                 //Reseteo gorrino1
                 if(this.time.now > (Player1.sprite.tiempo_gorrino - 100)){
-                    Player1.sprite.body.velocity.x = 0;
+                    //Player1.sprite.body.velocity.x = 0;
                     Player1.sprite.body.rotation = 0;
                     Player1.sprite.hace_gorrino = false;
                     //this.hace_gorrino_tap = false;
