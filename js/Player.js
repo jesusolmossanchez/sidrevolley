@@ -104,7 +104,8 @@ var Player = function(ruta, juego, id) {
             }
 
             if(adonde == "arriba" && !this.sprite.hace_gorrino && this.sprite.body.touching.down){
-                this.sprite.body.velocity.y = -550*juego.game.factor_slow_velocity;
+                //this.sprite.body.velocity.y = -550*juego.game.factor_slow_velocity;
+                this.sprite.body.velocity.y = -550;
                 Player1.sprite.salta = true;
                 this.sprite.animations.play('salta');
                 if (this.entreno){
