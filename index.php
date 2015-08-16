@@ -76,7 +76,7 @@
 		<form id="mandapuntos">
 			<p id="texto_fin"></p>
 			<p id="puntos"></p>
-			<p id="envia_tus_puntos">Send  your  score:</p>
+			<p id="envia_tus_puntos">Guarda  tu  puntuacion:</p>
 			<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
 			<input type="hidden" name="token" id="token" value="<?=$token?>">
 			<button id="envia_tu_nombre"> Enviar </button> 

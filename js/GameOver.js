@@ -67,10 +67,10 @@ DudeVolley.GameOver.prototype = {
 			var resultado;
 			var level;
 			if(this.game.hasperdio == true){
-				resultado = "lost";
+				resultado = "perdido";
 			}
 			else{
-				resultado = "win";
+				resultado = "ganado";
 				if (rutajuagdor != false){
 					var post_data= {
 				        rutaplayer: rutajuagdor,
@@ -95,7 +95,7 @@ DudeVolley.GameOver.prototype = {
 			$("#mandapuntos").show();
 			$("#contiene_mandapuntos").fadeIn();
 			$("#contiene_mandapuntos").focus();
-			$("#texto_fin").text("You "+resultado);
+			$("#texto_fin").text("Has   "+resultado+"!");
 			$("#puntos").text(this.game.puntos_player1+" - "+this.game.puntos_player2);
 
 			window.entra = 0;
