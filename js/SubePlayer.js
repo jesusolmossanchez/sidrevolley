@@ -146,7 +146,7 @@ DudeVolley.SubePlayer.prototype = {
 			//$("#contiene_clasificacion").slideDown();
 			$("#contiene_clasificacion").html('');
 			$("#contiene_clasificacion").css("background","none");
-			$("#contiene_mandapuntos").css("top","50px");
+			$("#contiene_mandapuntos").css("top","4vw");
 			this.default_player.visible = true;
 			this.upload_player.visible = true;
 			this.select_tipo.visible = true;
@@ -237,9 +237,9 @@ DudeVolley.SubePlayer.prototype = {
 			cache: false,      
 			processData:false,    
 			success: function(data){
+				$("#mandapuntos").hide();
 				$("#contiene_mandapuntos").show();
 				
-				$("#mandapuntos").slideUp();
 				acho = JSON.parse(data);
 				$.each(acho, function() {
 					var num = Number(this.tiempo);

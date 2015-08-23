@@ -84,7 +84,7 @@
 			<button id="envia_tu_nombre"> Enviar </button> 
 		</form>
 		<ul id="contiene_clasificacion">
-			<dl id="titulo_nivel"></dl>
+			<!--<dl id="titulo_nivel"></dl>-->
 		</ul>
 	</div>
 
