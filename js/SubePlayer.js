@@ -234,7 +234,7 @@ DudeVolley.SubePlayer.prototype = {
 					window.sube = 1;
 
 					$.ajax({
-						url: "../subeajax1.php", 
+						url: "subeajax1.php", 
 						type: "POST",             
 						data: new FormData(this),
 						contentType: false,   
@@ -253,7 +253,7 @@ DudeVolley.SubePlayer.prototype = {
 								if (window.sube2 < 1){
 									window.sube2 = 1;
 									$.ajax({
-										url: "../subeajax2.php", 
+										url: "subeajax2.php", 
 										type: "POST",             
 										data: new FormData(this),
 										contentType: false,   

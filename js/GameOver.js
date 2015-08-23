@@ -76,7 +76,7 @@ DudeVolley.GameOver.prototype = {
 				        rutaplayer: rutajuagdor,
 				        token: window.token
 				    }
-					$.post("../cambia_imagen_winner.php", post_data)
+					$.post("cambia_imagen_winner.php", post_data)
 						.done(function( data ) {
 							console.log(data);
 					});
@@ -115,7 +115,7 @@ DudeVolley.GameOver.prototype = {
 								        token: window.token,
 								        cri: cri
 								    }
-					$.post( "../registrapuntos.php", post_data)
+					$.post( "registrapuntos.php", post_data)
 						.done(function( data ) {
 							
 							$("#mandapuntos").slideUp();
