@@ -22,17 +22,22 @@ DudeVolley.SubePlayer.prototype = {
 		var jugadores_seleccionado = this.cache.getImage('jugadores_seleccionado');
 
 		//aqui pongo seleccionar imagen o subir una
-		this.default_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 150, 'default_player');
-		this.upload_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 250, 'upload_image');
-		this.how_to_play = this.add.sprite(this.world.centerX - default_player.width/2.0, 350, 'how_to_play');
+		this.default_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 120, 'default_player');
+		this.upload_player = this.add.sprite(this.world.centerX - default_player.width/2.0, 220, 'upload_image');
+		this.how_to_play = this.add.sprite(this.world.centerX - default_player.width/2.0, 320, 'how_to_play');
+		this.best_players = this.add.sprite(this.world.centerX - default_player.width/2.0, 420, 'best_players');
 		this.default_player.inputEnabled = true;
 		this.upload_player.inputEnabled = true;
 		this.how_to_play.inputEnabled = true;
+		this.best_players.inputEnabled = true;
 		this.default_player.input.sprite.events.onInputDown.add(this.empieza_default, this);
 		this.upload_player.input.sprite.events.onInputDown.add(this.empieza_upload, this);
 		this.how_to_play.input.sprite.events.onInputDown.add(this.empieza_how, this);
+		this.best_players.input.sprite.events.onInputDown.add(this.get_best_players, this);
 
-		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 150, 'jugadores_seleccionado');
+		this.game.best_player_got = false;
+
+		this.select_tipo = this.add.sprite(this.world.centerX - jugadores_seleccionado.width/2.0, 120, 'jugadores_seleccionado');
 
 		if (this.game.device.desktop){
 			this.select_dificultad = this.add.sprite(130,540,'select_dificultad');
@@ -60,6 +65,10 @@ DudeVolley.SubePlayer.prototype = {
 
 		this.nomoviendo1 = false;
 		this.nomoviendo1_y = false;
+
+		
+
+
 
 	},
 
@@ -130,6 +139,30 @@ DudeVolley.SubePlayer.prototype = {
 
     },
 
+    cierra_best: function(){
+    		this.game.best_player_got = false;
+
+			$("#contiene_mandapuntos").slideDown();
+			//$("#contiene_clasificacion").slideDown();
+			$("#contiene_clasificacion").html('');
+			$("#contiene_clasificacion").css("background","none");
+			$("#contiene_mandapuntos").css("top","50px");
+			this.default_player.visible = true;
+			this.upload_player.visible = true;
+			this.select_tipo.visible = true;
+			this.movil_jugar.visible = true;
+			this.how_to_play.visible = true;
+			this.best_players.visible = true;
+			if (this.game.device.desktop){
+				this.select_dificultad.visible = true;
+			}
+			else{
+				this.movil_select_dificultad.visible = true;
+			}
+
+		//});
+    },
+
 	update: function () {
 		//muevo el selector y salto al menu correspondiente
 
@@ -149,7 +182,7 @@ DudeVolley.SubePlayer.prototype = {
             this.mueveabajo = false;
 
 	        this.pos_select1_y =  this.select_tipo.position.y;
-	        limit_pos_y = 400;
+	        limit_pos_y = 500;
 	        if ((this.pos_select1_y+100) >= limit_pos_y){
 		        //control
 	        }
@@ -167,7 +200,7 @@ DudeVolley.SubePlayer.prototype = {
             this.mueveabajo = false;
 
 	        this.pos_select1_y =  this.select_tipo.position.y;
-	        limit_pos_y = 150;
+	        limit_pos_y = 120;
 	        if ((this.pos_select1_y-100) < limit_pos_y){
 		        //control
 	        }
@@ -184,16 +217,60 @@ DudeVolley.SubePlayer.prototype = {
 	},
 
 	empieza_default: function (pointer) {
-		this.select_tipo.position.y = 150;
+		this.select_tipo.position.y = 120;
 		this.empieza();
 	},
 	empieza_upload: function (pointer) {
-		this.select_tipo.position.y = 250;
+		this.select_tipo.position.y = 220;
 		this.empieza();
 	},
 	empieza_how: function (pointer) {
-		this.select_tipo.position.y = 350;
+		this.select_tipo.position.y = 320;
 		this.empieza();
+	},
+	get_best_players: function (pointer) {
+		eljuego = this;
+		$.ajax({
+			url: "best_players.php", 
+			type: "GET",             
+			contentType: false,   
+			cache: false,      
+			processData:false,    
+			success: function(data){
+				$("#contiene_mandapuntos").show();
+				
+				$("#mandapuntos").slideUp();
+				acho = JSON.parse(data);
+				$.each(acho, function() {
+					var num = Number(this.tiempo);
+					var seconds = Math.floor(num / 1000);
+					var minutes = Math.floor(seconds / 60);
+					var seconds = seconds - (minutes * 60);
+					if (seconds<10){
+						seconds="0"+seconds;
+					}
+					var format = minutes + ':' + seconds
+					//$("#titulo_nivel").html("Nivel: "+level);
+					$("#contiene_clasificacion").html($("#contiene_clasificacion").html()+"<dl><dt>"+this.nombre+"</dt><dd>"+this.puntuacion+"("+format+")</dd></dl>");
+				  	$("#contiene_clasificacion").css("background","#000000");
+				  	$("#contiene_mandapuntos").css("top","120px");
+				  	//use obj.id and obj.name here, for example:
+				});
+				$("#contiene_clasificacion").html($("#contiene_clasificacion").html()+"<div style='text-align:center;'><input id='volver_menu' onclick='eljuego.cierra_best();' type='submit' value='volver' /></div>");
+				eljuego.default_player.visible = false;
+				eljuego.upload_player.visible = false;
+				eljuego.select_tipo.visible = false;
+				eljuego.movil_jugar.visible = false;
+				eljuego.how_to_play.visible = false;
+				eljuego.best_players.visible = false;
+				if (eljuego.game.device.desktop){
+					eljuego.select_dificultad.visible = false;
+				}
+				else{
+					eljuego.movil_select_dificultad.visible = false;
+				}
+			}
+		});
 	},
 
 	empieza: function (pointer) {
@@ -201,12 +278,12 @@ DudeVolley.SubePlayer.prototype = {
 		this.game.normalplayer = false;
 		//dificultad jodia por defecto ( 2 )
 		yomismo = this;
-    	if (this.select_tipo.position.y == 150){
+    	if (this.select_tipo.position.y == 120){
 			this.game.level = 2;
 			this.game.normalplayer = true;
 			yomismo.juega(false);
 		}
-		if (this.select_tipo.position.y == 250){
+		if (this.select_tipo.position.y == 220){
 			this.game.level = 2;
 
 			this.default_player.destroy();
@@ -214,6 +291,7 @@ DudeVolley.SubePlayer.prototype = {
 			this.select_tipo.destroy();
 			this.movil_jugar.destroy();
 			this.how_to_play.destroy();
+			this.best_players.destroy();
 			if (this.game.device.desktop){
 				this.select_dificultad.destroy();
 			}
@@ -275,10 +353,14 @@ DudeVolley.SubePlayer.prototype = {
 
 
 		}
-		if (this.select_tipo.position.y == 350){
+		if (this.select_tipo.position.y == 320){
 			this.game.level = 2;
 			this.game.normalplayer = true;
 			yomismo.entrena(false);
+		}
+		if (this.select_tipo.position.y == 420 && !this.game.best_player_got){
+			this.game.best_player_got = true;
+			yomismo.get_best_players();
 		}
 		//
 

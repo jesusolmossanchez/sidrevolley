@@ -71,6 +71,15 @@ canvas{
     padding: 3vw 2vw;
     //width: 260px;
 }
+#volver_menu{
+    color: #f5f823;
+    font-size: 40px;
+    font-size: 4vw;
+    background: none;
+    border: 1vw solid #f5f823;
+    padding: 1vw;
+    margin-top: 1vw;
+}
 #subefoto{
     display: none;
     text-align: center;

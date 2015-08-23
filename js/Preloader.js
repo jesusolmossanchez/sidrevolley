@@ -51,6 +51,7 @@ DudeVolley.Preloader.prototype = {
 	    this.load.image('default_player', 'assets/default_player_es.png'); //titulos dificultades
 	    this.load.image('upload_image', 'assets/upload_image_es.png');
 	    this.load.image('how_to_play', 'assets/how_to_play_es.png');
+	    this.load.image('best_players', 'assets/best_players_es.png');
 	    /*
 	    this.load.image('chupao', 'assets/chupao.png'); //titulos dificultades
 	    this.load.image('normalico', 'assets/normalico.png');
