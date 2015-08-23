@@ -150,7 +150,7 @@ imageflip($top_image,IMG_FLIP_HORIZONTAL);
 imagecopy($merged_image, $top_image, 265, 0, 0, 0, $targ_w, $targ_h);
 imagepng($merged_image, $merged_image2);
 
-echo $merged_image2;
+echo '../'.$merged_image2;
 $_SESSION['suebeajax2'] = 1;
 
 //imagedestroy($dest);

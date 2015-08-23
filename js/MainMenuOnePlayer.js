@@ -11,23 +11,23 @@ DudeVolley.MainMenuOnePlayer.prototype = {
 	preload: function (){
 		ga('send', 'pageview', '/FakeMenu');
 		if (this.game.normalplayer){
-			this.load.spritesheet('player1','cpu_player/default_player.png',80,110)
+			this.load.spritesheet('player1','../cpu_player/default_player.png',80,110)
 		}else{
 			this.load.spritesheet('player1', this.game.ruta_jugador, 80, 110);
 		}
 
-        this.load.image('volver', 'assets/volver.png');
+        this.load.image('volver', '../assets/volver.png');
 		if (this.game.device.desktop){
-            this.load.image('tip1', 'assets/muevete.png');
-            this.load.image('tip2', 'assets/salta_arriba.png');
-            this.load.image('tip3', 'assets/gorrino.png');
-            this.load.image('tip4', 'assets/mate.png');
+            this.load.image('tip1', '../assets/muevete.png');
+            this.load.image('tip2', '../assets/salta_arriba.png');
+            this.load.image('tip3', '../assets/gorrino.png');
+            this.load.image('tip4', '../assets/mate.png');
         }
         else{
-            this.load.image('tip1', 'assets/muevete_movil.png');
-            this.load.image('tip2', 'assets/salta_arriba_movil.png');
-            this.load.image('tip3', 'assets/gorrino_movil.png');
-            this.load.image('tip4', 'assets/mate_movil.png');          
+            this.load.image('tip1', '../assets/muevete_movil.png');
+            this.load.image('tip2', '../assets/salta_arriba_movil.png');
+            this.load.image('tip3', '../assets/gorrino_movil.png');
+            this.load.image('tip4', '../assets/mate_movil.png');          
         }
 	},
 	

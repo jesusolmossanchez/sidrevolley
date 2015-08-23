@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
     if ($_SESSION['puntos_registrados'] === 1) {
 	    echo "Puntos ya registrados!!";
@@ -6,14 +7,19 @@
     }
 
     if($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {
-      header('Location: http://jesusolmos.es');
+      	header('Location: http://jesusolmos.es');
     }
     /*
     if(!@isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']=="http://projects.local/tuvolley/index.php"){
       header('Location: http://jesusolmos.es');
     }*/
     if($_POST['token'] != $_SESSION['token']) {
-      header('Location: http://jesusolmos.es');
+      	header('Location: http://jesusolmos.es');
+    }
+    
+    if($_POST['cri'] !== md5($_POST['diferencia'].$_POST['puntuacion'].$_POST['tiempo'].$_POST['token'])){
+    	echo "ho ho ho, no dijiste la palabra mágica";
+      	exit;
     }
     $token = $_POST["token"];
 	$dif = intval($_POST['diferencia']);
@@ -25,7 +31,8 @@
 				'nombre' => $_POST['nombre'],
 				'diferencia' => $dif,
 				'puntuacion' => $_POST['puntuacion'],
-				'tiempo' => $tiempo
+				'tiempo' => $tiempo,
+				'fecha' => date("Y-m-d H:i:s")
 			);
 
 	// Configuration

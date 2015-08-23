@@ -44,10 +44,10 @@ DudeVolley.Boot.prototype = {
     preload: function () {
 
         //imagen para empezar y barra de progreso
-        //this.load.image('titulo', 'assets/titulo1_cargando.png');
-        this.load.image('titulo', 'assets/dude_volley_title.png');
-        //this.load.image('preloaderBar', 'assets/preloader.png');
-        this.load.image('preloaderBar', 'assets/cargando_dude.png');
+        //this.load.image('titulo', '../assets/titulo1_cargando.png');
+        this.load.image('titulo', '../assets/dude_volley_title.png');
+        //this.load.image('preloaderBar', '../assets/preloader.png');
+        this.load.image('preloaderBar', '../assets/cargando_dude.png');
 
     },
 

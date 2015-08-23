@@ -131,7 +131,7 @@
 <div class="container" style="width:auto;">
 
 
-  <img style="width:auto;" src="img/<?=$file_name;?>" id="target"/>
+  <img style="width:auto;" src="../img/<?=$file_name;?>" id="target"/>
 
 
 <div class="clearfix"></div>
