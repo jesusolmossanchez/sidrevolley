@@ -11,6 +11,7 @@ var Player = function(ruta, juego, id) {
         this.sprite.animations.add('salta', [1], 5, true);
         this.sprite.limite_izquierda = 410;
         this.sprite.limite_derecha = 800;
+        this.soyplayer1 = false; 
 	}
 	else{
 		this.sprite =juego.add.sprite(32, juego.world.height - 250, ruta);
@@ -19,6 +20,7 @@ var Player = function(ruta, juego, id) {
     	this.sprite.animations.add('salta', [2], 5, true);
     	this.sprite.limite_izquierda = 0;
     	this.sprite.limite_derecha = 380;
+        this.soyplayer1 = true; 
 	}
 
 	this.id = id;

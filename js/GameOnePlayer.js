@@ -56,7 +56,26 @@ BasicGame.GameOnePlayer.prototype = {
             }
         };
 
+        function onNewPlayer2(data) {
+            //Me viene uno nuevo, lo creo
+            console.log("New player2 connected: "+data);
+            if (typeof Player1 === 'undefined'){
+                Player1 = new Player('cpu', eljuego, data);
+                this.soyel2 = true;
+            }
+        };
+
         function onSaMovio(data) {
+
+            if (data.id !== Player1.id && typeof OTROPLAYER === 'undefined'){
+                if (Player1.soyplayer1 == false){
+                    ruta = "player1";
+                }
+                else{
+                    ruta = 'cpu';
+                }
+                OTROPLAYER = new Player(ruta, eljuego, data);
+            }
             if (data.id !== Player1.id){
                 //el otro se mueve y lo muevo
                 if (data.dir == "derecha"){
@@ -86,6 +105,8 @@ BasicGame.GameOnePlayer.prototype = {
             socket.on("disconnect", onSocketDisconnect);
             // New player message received
             socket.on("new player", onNewPlayer);
+            // New player message received
+            socket.on("new player2", onNewPlayer2);
             // Player move message received
             socket.on("samovio", onSaMovio);
             // Player removed message received
@@ -330,7 +351,7 @@ BasicGame.GameOnePlayer.prototype = {
 
             }
             this.sombra2.position.set(OTROPLAYER.sprite.body.position.x, this.world.height - 144);
-            this.physics.arcade.collide(this.pelota, OTROPLAYER.sprite, this.pika, null, this);
+            this.physics.arcade.collide(this.pelota, OTROPLAYER.sprite, this.pika_OTRO, null, this);
             this.physics.arcade.collide(OTROPLAYER.sprite, platforms);
         }
         if (typeof Player1 !== 'undefined'){
@@ -655,6 +676,7 @@ BasicGame.GameOnePlayer.prototype = {
 
     pika: function () {
 
+
         if (this.punto){
             return true;
         }
@@ -669,6 +691,73 @@ BasicGame.GameOnePlayer.prototype = {
         v_y_pelota = this.pelota.body.velocity.y;
         this.pelota.body.velocity.x = diferencia*3;
         if (this.time.now < Player1.sprite.enfadao_time && Player1.sprite.enfadao){
+            //this.acho_audio2.play("",0,0.3);
+
+
+            if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
+                && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
+            {
+                this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
+            }
+            else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
+                && (!cursors.down.isDown && !this.mueveabajo)){
+                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+            else if((cursors.left.isDown || this.mueveizquierda) && (cursors.up.isDown || this.muevearriba) 
+                && (!cursors.down.isDown && !this.mueveabajo)){
+                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = -800*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+            else if((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
+                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 1000*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.muevearriba)
+                && (!cursors.up.isDown && !this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                this.pelota.body.velocity.y = -100*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                && (cursors.up.isDown || this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                this.pelota.body.velocity.y = -1000*this.game.factor_slow_velocity;
+                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+            }
+        }
+
+    },
+
+    pika_OTRO: function () {
+
+
+        if (this.punto){
+            return true;
+        }
+        //////console.log(this.pelota.body.newVelocity.y);
+        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
+        this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
+        //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
+        pos_pelota = this.pelota.body.position.x;
+        pos_player = OTROPLAYER.sprite.body.position.x;
+        diferencia = pos_pelota - pos_player;
+        v_x_pelota = this.pelota.body.velocity.x;
+        v_y_pelota = this.pelota.body.velocity.y;
+        this.pelota.body.velocity.x = diferencia*3;
+        if (this.time.now < OTROPLAYER.sprite.enfadao_time && OTROPLAYER.sprite.enfadao){
             //this.acho_audio2.play("",0,0.3);
 
 

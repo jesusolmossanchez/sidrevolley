@@ -8,16 +8,29 @@ var setEventHandlers = function() {
 function onSocketConnection(client) {
 	//Me llega que se ha conectao alguien
     util.log("New player has connected: "+client.id);
-	this.emit("new player", client.id)
+
+    if(players.length > 0){
+    	this.emit("new player2", client.id);
+    }
+    else{
+    	this.emit("new player", client.id);
+    }
+
+	players.push(client.id);
+    util.log(players);
+	
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
 };
 function onClientDisconnect() {
     util.log("Player has disconnected: "+this.id);
+    util.log(players);
+    players.splice(players.indexOf(this.id), 1);
+    util.log(players);
 };
 function onNewPlayer(data) {
-	
+	util.log("pasas por aqui?");
 	/*
 	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY()});
 
@@ -30,7 +43,7 @@ function onNewPlayer(data) {
 	*/
 };
 function onMovePlayer(data) {
-	util.log(data.id);
+	//util.log(data.id);
 	io.emit("samovio", data)
 };
 function init() {
