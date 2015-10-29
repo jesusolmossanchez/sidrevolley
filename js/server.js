@@ -5,6 +5,9 @@ var setEventHandlers = function() {
 	io.sockets.on("connection", onSocketConnection);
 };
 
+
+var yasta = false;
+
 function onSocketConnection(client) {
 	//Me llega que se ha conectao alguien
     util.log("New player has connected: "+client.id);
@@ -15,13 +18,25 @@ function onSocketConnection(client) {
     else{
     	this.emit("new player", client.id);
     }
-
-	players.push(client.id);
-    util.log(players);
+    players.push(client.id);
+    //util.log(players);
+    util.log(players.length);
+    
+    if (players.length == 2){
+    	if(!yasta){
+    		yasta = true;
+    		this.emit("ya estamos todos");
+    	}
+    }
+    else{
+    	yasta = false;
+    }
+	
 	
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
+    client.on("posicion pelota", onPosicionPelota);
 };
 function onClientDisconnect() {
     util.log("Player has disconnected: "+this.id);
@@ -44,7 +59,10 @@ function onNewPlayer(data) {
 };
 function onMovePlayer(data) {
 	//util.log(data.id);
-	io.emit("samovio", data)
+	io.emit("samovio", data);
+};
+function onPosicionPelota(data) {
+	io.emit("situapelota", data);
 };
 function init() {
     players = [];

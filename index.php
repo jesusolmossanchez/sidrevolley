@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="fonts/ArcadeClassic.eot?#iefix" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="http://localhost:8080/socket.io/socket.io.js"></script>
-	<script src="js/phaser.min.js"></script>
+	<script src="js/phaser.min2.js"></script>
 	<script src="js/Boot.js"></script>
 	<script src="js/Preloader.js"></script>
 	<script src="js/PreMainMenu.js"></script>

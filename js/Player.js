@@ -61,19 +61,19 @@ var Player = function(ruta, juego, id) {
         else{
             if (adonde == "izquierda" && this.sprite.position.x > this.sprite.limite_izquierda){
                 this.sprite.body.velocity.x = -150*juego.game.factor_slow_velocity;
-                if (juego.time.now > this.sprite.enfadao_time && Player1.sprite.salta != true){
+                if (juego.time.now > this.sprite.enfadao_time && this.sprite.salta != true){
                     this.sprite.animations.play('semueve');
                 }
             }
             else if (adonde == "derecha" && this.sprite.position.x < this.sprite.limite_derecha){
                 this.sprite.body.velocity.x = 150*juego.game.factor_slow_velocity;
-                if (juego.time.now > this.sprite.enfadao_time && Player1.sprite.salta != true){
+                if (juego.time.now > this.sprite.enfadao_time && this.sprite.salta != true){
                     this.sprite.animations.play('semueve');
                 }
             }
             else
             {
-                if (adonde == "parao" && juego.time.now > this.sprite.enfadao_time && Player1.sprite.salta != true){
+                if (adonde == "parao" && juego.time.now > this.sprite.enfadao_time && this.sprite.salta != true){
                     this.sprite.animations.stop();
                     this.sprite.body.velocity.x = 0;
                     this.sprite.frame = 0;
@@ -82,7 +82,7 @@ var Player = function(ruta, juego, id) {
 
             if(adonde == "arriba" && !this.sprite.hace_gorrino && this.sprite.body.touching.down){
                 this.sprite.body.velocity.y = -550*juego.game.factor_slow_velocity;
-                Player1.sprite.salta = true;
+                this.sprite.salta = true;
                 this.sprite.animations.play('salta');
                 
             }

@@ -54,6 +54,7 @@ BasicGame.GameOnePlayer.prototype = {
             else{
                 OTROPLAYER = new Player('player1', eljuego, data);
             }
+
         };
 
         function onNewPlayer2(data) {
@@ -63,10 +64,7 @@ BasicGame.GameOnePlayer.prototype = {
                 Player1 = new Player('cpu', eljuego, data);
                 this.soyel2 = true;
             }
-        };
-
-        function onSaMovio(data) {
-
+            
             if (data.id !== Player1.id && typeof OTROPLAYER === 'undefined'){
                 if (Player1.soyplayer1 == false){
                     ruta = "player1";
@@ -75,9 +73,34 @@ BasicGame.GameOnePlayer.prototype = {
                     ruta = 'cpu';
                 }
                 OTROPLAYER = new Player(ruta, eljuego, data);
+                console.log("EL OTRO!");
             }
-            if (data.id !== Player1.id){
+            
+        };
+
+        function onYaestaPlayer(data) {
+            //Me viene uno nuevo, lo creo
+            console.log("palante!!");
+            eljuego.empieza("uno");
+        };
+
+        function onSaMovio(data) {
+            if (data.id === Player1.id){
                 //el otro se mueve y lo muevo
+                if (data.dir == "derecha"){
+                    Player1.mueve("derecha");
+                }
+                if (data.dir == "izquierda"){
+                    Player1.mueve("izquierda");
+                }
+                if (data.dir == "arriba"){
+                    Player1.mueve("arriba");   
+                }
+                if (data.dir == "parao"){
+                    Player1.mueve("parao");
+                }
+            }
+            else{
                 if (data.dir == "derecha"){
                     OTROPLAYER.mueve("derecha");
                 }
@@ -92,6 +115,15 @@ BasicGame.GameOnePlayer.prototype = {
                 }
             }
             
+        };
+
+
+        function onSituaPelota(data) {
+            //console.log(data)
+            eljuego.pelota.x = data.x;
+            eljuego.pelota.y = data.y;
+            eljuego.pelota.body.velocity.x = data.vx;
+            eljuego.pelota.body.velocity.y = data.vy;
         };
 
         function onRemovePlayer(data) {
@@ -109,10 +141,16 @@ BasicGame.GameOnePlayer.prototype = {
             socket.on("new player2", onNewPlayer2);
             // Player move message received
             socket.on("samovio", onSaMovio);
+            // Player move message received
+            socket.on("situapelota", onSituaPelota);
             // Player removed message received
             socket.on("remove player", onRemovePlayer);
+            // Player removed message received
+            socket.on("ya estamos todos", onYaestaPlayer);
         };
 
+
+        this.sincronizapelotatime = this.time.now + 1000;
 
          //Inicializo la fisica del juego
         this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -208,13 +246,12 @@ BasicGame.GameOnePlayer.prototype = {
         //Player2.sprite.anchor.setTo(0.5, 0.5);
 
 
-        this.pelota = this.add.sprite(32, 0, 'pelota');
-        this.pelota.anchor.setTo(0.5, 0.5);
+        
 
         //Fisica de jugadores y this.pelota
         
         //this.physics.arcade.enable(Player2.sprite);
-        this.physics.arcade.enable(this.pelota);
+        
 
 
 
@@ -226,11 +263,7 @@ BasicGame.GameOnePlayer.prototype = {
         //Player2.sprite.body.collideWorldBounds = true;
 
         //Fisica de la this.pelota
-        this.pelota.body.bounce.y = 0.9;
-        this.pelota.body.bounce.x = 0.900;
-        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
-        this.pelota.body.collideWorldBounds = true;
-        this.pelota.body.deltaMax = (400,400)
+        
 
         //animaciones de movimiento
         
@@ -341,7 +374,9 @@ BasicGame.GameOnePlayer.prototype = {
 
             }
             this.sombra2.position.set(Player2.sprite.body.position.x, this.world.height - 144);
-            this.physics.arcade.collide(this.pelota, Player2.sprite, this.pika_maquina, null, this);
+            if (typeof this.pelota !== 'undefined'){
+                this.physics.arcade.collide(this.pelota, Player2.sprite, this.pika_maquina, null, this);
+            }
             this.physics.arcade.collide(Player2.sprite, platforms);
         }
         if (typeof OTROPLAYER !== 'undefined'){
@@ -351,7 +386,9 @@ BasicGame.GameOnePlayer.prototype = {
 
             }
             this.sombra2.position.set(OTROPLAYER.sprite.body.position.x, this.world.height - 144);
-            this.physics.arcade.collide(this.pelota, OTROPLAYER.sprite, this.pika_OTRO, null, this);
+            if (typeof this.pelota !== 'undefined'){
+                this.physics.arcade.collide(this.pelota, OTROPLAYER.sprite, this.pika_OTRO, null, this);
+            }
             this.physics.arcade.collide(OTROPLAYER.sprite, platforms);
         }
         if (typeof Player1 !== 'undefined'){
@@ -360,17 +397,26 @@ BasicGame.GameOnePlayer.prototype = {
                 Player1.sprite.salta = false;
             }
             this.sombra1.position.set(Player1.sprite.body.position.x, this.world.height - 144);
-            this.physics.arcade.collide(this.pelota, Player1.sprite, this.pika, null, this);
+            if (typeof this.pelota !== 'undefined'){
+                this.physics.arcade.collide(this.pelota, Player1.sprite, this.pika, null, this);
+            }
             this.physics.arcade.collide(Player1.sprite, platforms);
         }
         
         
 
-        
-        this.sombra_pelota.position.set(this.pelota.body.position.x, this.world.height - 144);
+        if (typeof this.pelota !== 'undefined'){
+            this.sombra_pelota.position.set(this.pelota.body.position.x, this.world.height - 144);
+            this.pelota.angle += this.pelota.body.velocity.x/20;
+            this.physics.arcade.collide(this.pelota, platforms);
+            
+            if (this.time.now > this.sincronizapelotatime){
+                socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
+                this.sincronizapelotatime = this.time.now + 1400;        
+            }
+        }
 
 
-        this.pelota.angle += this.pelota.body.velocity.x/20;
         //choque de this.pelota con jugador
         
         //pruebas para el cpu player
@@ -380,7 +426,6 @@ BasicGame.GameOnePlayer.prototype = {
         
 
         //choque de this.pelota con cosas
-        this.physics.arcade.collide(this.pelota, platforms);
 
         //console.log("se mueve a la izquierda?"+this.mueveizquierda);
                     
@@ -437,22 +482,23 @@ BasicGame.GameOnePlayer.prototype = {
 
                 if (cursors.left.isDown || this.mueveizquierda){
                     socket.emit("move player", {id: Player1.id, dir: "izquierda"});
-                    Player1.mueve("izquierda");
+                    //Player1.mueve("izquierda");
                 }
                 else if(cursors.right.isDown || this.muevederecha){
                     //this.mueve("derecha",Player1.sprite);
                     socket.emit("move player", {id: Player1.id, dir: "derecha"});
-                    Player1.mueve("derecha");
+                    //Player1.mueve("derecha");
                 }
                 else{
-                    socket.emit("move player", {id: Player1.id, dir: "parao"});
-                    Player1.mueve("parao");
+                    //socket.emit("move player", {id: Player1.id, dir: "parao"});
+                    //socket.emit("move yo", {dir: "par"});
+                    //Player1.mueve("parao");
                     //this.mueve("parao",Player1.sprite);
                 }
 
                 if (cursors.up.isDown || this.muevearriba){
                     socket.emit("move player", {id: Player1.id, dir: "arriba"});
-                    Player1.mueve("arriba");
+                    //Player1.mueve("arriba");
                     //this.mueve("arriba",Player1.sprite);
                 }
             }
@@ -482,11 +528,13 @@ BasicGame.GameOnePlayer.prototype = {
             */
 
 
-
-            if(this.pelota.body.position.y > this.world.height-185 && (typeof Player2 !== 'undefined')){
-                //LA PELOTA TOCA EL SUELO
-                this.procesapunto();
+            if (typeof this.pelota !== 'undefined'){
+                if(this.pelota.body.position.y > this.world.height-185 && (typeof Player2 !== 'undefined')){
+                    //LA PELOTA TOCA EL SUELO
+                    this.procesapunto();
+                }
             }
+            
         }
 
 
@@ -676,136 +724,138 @@ BasicGame.GameOnePlayer.prototype = {
 
     pika: function () {
 
+        if (typeof this.pelota !== 'undefined'){
+            if (this.punto){
+                return true;
+            }
+            //////console.log(this.pelota.body.newVelocity.y);
+            this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
+            this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
+            //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
+            pos_pelota = this.pelota.body.position.x;
+            pos_player = Player1.sprite.body.position.x;
+            diferencia = pos_pelota - pos_player;
+            v_x_pelota = this.pelota.body.velocity.x;
+            v_y_pelota = this.pelota.body.velocity.y;
+            this.pelota.body.velocity.x = diferencia*3;
+            if (this.time.now < Player1.sprite.enfadao_time && Player1.sprite.enfadao){
+                //this.acho_audio2.play("",0,0.3);
 
-        if (this.punto){
-            return true;
+
+                if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
+                    && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
+                {
+                    this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
+                }
+                else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
+                    && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((cursors.left.isDown || this.mueveizquierda) && (cursors.up.isDown || this.muevearriba) 
+                    && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
+                    && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                    this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 1000*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                    && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                    this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.muevearriba)
+                    && (!cursors.up.isDown && !this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -100*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                    && (cursors.up.isDown || this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -1000*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+            }
+            //socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
+
         }
-        //////console.log(this.pelota.body.newVelocity.y);
-        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
-        this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
-        //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
-        pos_pelota = this.pelota.body.position.x;
-        pos_player = Player1.sprite.body.position.x;
-        diferencia = pos_pelota - pos_player;
-        v_x_pelota = this.pelota.body.velocity.x;
-        v_y_pelota = this.pelota.body.velocity.y;
-        this.pelota.body.velocity.x = diferencia*3;
-        if (this.time.now < Player1.sprite.enfadao_time && Player1.sprite.enfadao){
-            //this.acho_audio2.play("",0,0.3);
-
-
-            if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
-                && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
-            {
-                this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
-            }
-            else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
-                && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((cursors.left.isDown || this.mueveizquierda) && (cursors.up.isDown || this.muevearriba) 
-                && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = -800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
-                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
-                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 1000*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
-                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
-                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.muevearriba)
-                && (!cursors.up.isDown && !this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -100*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
-                && (cursors.up.isDown || this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -1000*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-        }
-
     },
 
     pika_OTRO: function () {
 
+        if (typeof this.pelota !== 'undefined'){
+            if (this.punto){
+                return true;
+            }
+            //////console.log(this.pelota.body.newVelocity.y);
+            this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
+            this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
+            //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
+            pos_pelota = this.pelota.body.position.x;
+            pos_player = OTROPLAYER.sprite.body.position.x;
+            diferencia = pos_pelota - pos_player;
+            v_x_pelota = this.pelota.body.velocity.x;
+            v_y_pelota = this.pelota.body.velocity.y;
+            this.pelota.body.velocity.x = diferencia*3;
+            if (this.time.now < OTROPLAYER.sprite.enfadao_time && OTROPLAYER.sprite.enfadao){
+                //this.acho_audio2.play("",0,0.3);
 
-        if (this.punto){
-            return true;
+
+                if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
+                    && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
+                {
+                    this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
+                }
+                else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
+                    && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((cursors.left.isDown || this.mueveizquierda) && (cursors.up.isDown || this.muevearriba) 
+                    && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = -800*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
+                    && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                    this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 1000*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                    && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
+                    this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.muevearriba)
+                    && (!cursors.up.isDown && !this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -100*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+                else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
+                    && (cursors.up.isDown || this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
+                    this.pelota.body.velocity.y = -1000*this.game.factor_slow_velocity;
+                    this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
+                    this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
+                }
+            }
         }
-        //////console.log(this.pelota.body.newVelocity.y);
-        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
-        this.pelota.body.velocity.y = -600*this.game.factor_slow_velocity;
-        //this.pelota.body.velocity.y = this.pelota.body.velocity.y * (-7);
-        pos_pelota = this.pelota.body.position.x;
-        pos_player = OTROPLAYER.sprite.body.position.x;
-        diferencia = pos_pelota - pos_player;
-        v_x_pelota = this.pelota.body.velocity.x;
-        v_y_pelota = this.pelota.body.velocity.y;
-        this.pelota.body.velocity.x = diferencia*3;
-        if (this.time.now < OTROPLAYER.sprite.enfadao_time && OTROPLAYER.sprite.enfadao){
-            //this.acho_audio2.play("",0,0.3);
-
-
-            if ((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha || !this.game.device.desktop) 
-                && (!cursors.up.isDown && !this.muevearriba)  && (!cursors.down.isDown && !this.mueveabajo))
-            {
-                this.pelota.body.velocity.y = v_y_pelota*0.3*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1500*this.game.factor_slow_gravity;
-            }
-            else if((cursors.right.isDown || this.muevederecha)  && (cursors.up.isDown || this.muevearriba) 
-                && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((cursors.left.isDown || this.mueveizquierda) && (cursors.up.isDown || this.muevearriba) 
-                && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = -800*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((cursors.right.isDown || cursors.left.isDown || this.mueveizquierda || this.muevederecha) 
-                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
-                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 1000*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
-                && (!cursors.up.isDown && !this.muevearriba) && (cursors.down.isDown || this.mueveabajo)){
-                this.pelota.body.velocity.y = 800*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.muevearriba)
-                && (!cursors.up.isDown && !this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -100*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-            else if((!cursors.right.isDown && !this.muevederecha) && (!cursors.left.isDown && !this.mueveizquierda) 
-                && (cursors.up.isDown || this.muevearriba) && (!cursors.down.isDown && !this.mueveabajo)){
-                this.pelota.body.velocity.y = -1000*this.game.factor_slow_velocity;
-                this.pelota.body.velocity.x = 300*this.game.factor_slow_velocity;
-                this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
-            }
-        }
-
     },
 
 
@@ -864,7 +914,8 @@ BasicGame.GameOnePlayer.prototype = {
 
     empieza: function (quien) {
         //////console.log("cocotu")
-        Player2.sprite.frame = 1;
+        /*
+        OTROPLAYER.sprite.frame = 1;
         Player1.sprite.frame = 1;
         this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
         Player1.sprite.body.position.x = 32;
@@ -872,10 +923,10 @@ BasicGame.GameOnePlayer.prototype = {
         Player1.sprite.body.velocity.x = 0;
         Player1.sprite.body.velocity.y = 0;
 
-        Player2.sprite.body.position.x = this.world.width - 52;
-        Player2.sprite.body.position.y = this.world.height - 350;
-        Player2.sprite.body.velocity.x = 0;
-        Player2.sprite.body.velocity.y = 0;
+        OTROPLAYER.sprite.body.position.x = this.world.width - 52;
+        OTROPLAYER.sprite.body.position.y = this.world.height - 350;
+        OTROPLAYER.sprite.body.velocity.x = 0;
+        OTROPLAYER.sprite.body.velocity.y = 0;
 
         this.pelota.body.position.y = 0;
         this.pelota.body.velocity.x = 0;
@@ -886,6 +937,16 @@ BasicGame.GameOnePlayer.prototype = {
         else{
             this.pelota.body.position.x = this.world.width - 52;
         }
+        */
+        this.pelota = this.add.sprite(32, 0, 'pelota');
+        this.pelota.anchor.setTo(0.5, 0.5);
+        this.physics.arcade.enable(this.pelota);
+        this.pelota.body.bounce.y = 0.9;
+        this.pelota.body.bounce.x = 0.900;
+        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
+        this.pelota.body.collideWorldBounds = true;
+        this.pelota.body.deltaMax = (400,400)
+        //console.log(this.pelota.body.position);
     }
 
 };
