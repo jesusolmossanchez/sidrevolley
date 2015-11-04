@@ -119,11 +119,42 @@ BasicGame.GameOnePlayer.prototype = {
 
 
         function onSituaPelota(data) {
-            //console.log(data)
-            eljuego.pelota.x = data.x;
-            eljuego.pelota.y = data.y;
-            eljuego.pelota.body.velocity.x = data.vx;
-            eljuego.pelota.body.velocity.y = data.vy;
+            if (!Player1.soyplayer1){
+                /*
+                //console.log(eljuego.time.now)
+                //console.log(data)
+                var pelota = eljuego.pelota;
+               //var pelotay = eljuego.pelota.y;
+                var bounce=eljuego.add.tween(pelota);
+                //var bounce2=eljuego.add.tween(pelotay);
+                //bounce.to({ x: data.x }, 300, Phaser.Math.linearInterpolation);
+                //bounce.to({ y: data.y }, 300, Phaser.Math.linearInterpolation);
+                var tween = eljuego.add.tween(pelota).to({
+                    x: [data.x],
+                    y: [data.y]
+                }, 10);
+                tween.interpolation(function(v, k){
+                    return Phaser.Math.bezierInterpolation(v, k);
+                });
+                tween.start();*/
+                //bounce2.start();
+                eljuego.pelota.x = data.x;
+                eljuego.pelota.y = data.y;
+//                eljuego.pelota.body.velocity.x = data.vx;
+  //              eljuego.pelota.body.velocity.y = data.vy;
+            }
+        };
+
+        function onTururaki(data) {
+            //socket.emit("posicion pelota", {x: eljuego.pelota.x, y: eljuego.pelota.y, vx: eljuego.pelota.body.velocity.x, vy:eljuego.pelota.body.velocity.y});
+              
+            if (data.id === Player1.id){
+                eljuego.pika();
+            }
+            else{
+                eljuego.pika_OTRO();
+            }
+            
         };
 
         function onRemovePlayer(data) {
@@ -143,6 +174,8 @@ BasicGame.GameOnePlayer.prototype = {
             socket.on("samovio", onSaMovio);
             // Player move message received
             socket.on("situapelota", onSituaPelota);
+            // Player move message received
+            socket.on("tururaki", onTururaki);
             // Player removed message received
             socket.on("remove player", onRemovePlayer);
             // Player removed message received
@@ -405,14 +438,14 @@ BasicGame.GameOnePlayer.prototype = {
         
         
 
-        if (typeof this.pelota !== 'undefined'){
+        if (typeof this.pelota !== 'undefined' && Player1.soyplayer1){
             this.sombra_pelota.position.set(this.pelota.body.position.x, this.world.height - 144);
             this.pelota.angle += this.pelota.body.velocity.x/20;
             this.physics.arcade.collide(this.pelota, platforms);
             
             if (this.time.now > this.sincronizapelotatime){
                 socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
-                this.sincronizapelotatime = this.time.now + 1400;        
+                this.sincronizapelotatime = this.time.now + 30;        
             }
         }
 
@@ -490,7 +523,7 @@ BasicGame.GameOnePlayer.prototype = {
                     //Player1.mueve("derecha");
                 }
                 else{
-                    //socket.emit("move player", {id: Player1.id, dir: "parao"});
+                    socket.emit("move player", {id: Player1.id, dir: "parao"});
                     //socket.emit("move yo", {dir: "par"});
                     //Player1.mueve("parao");
                     //this.mueve("parao",Player1.sprite);
@@ -527,14 +560,14 @@ BasicGame.GameOnePlayer.prototype = {
             }
             */
 
-
+/*
             if (typeof this.pelota !== 'undefined'){
                 if(this.pelota.body.position.y > this.world.height-185 && (typeof Player2 !== 'undefined')){
                     //LA PELOTA TOCA EL SUELO
                     this.procesapunto();
                 }
             }
-            
+            */
         }
 
 
@@ -722,6 +755,11 @@ BasicGame.GameOnePlayer.prototype = {
 
     },
 
+    pre_pika: function (){
+        //socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
+        socket.emit("tururu",{id:Player1.id, x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
+    },
+
     pika: function () {
 
         if (typeof this.pelota !== 'undefined'){
@@ -786,8 +824,8 @@ BasicGame.GameOnePlayer.prototype = {
                     this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
                 }
             }
+            //console.log(this.time.now)
             //socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
-
         }
     },
 
@@ -855,6 +893,8 @@ BasicGame.GameOnePlayer.prototype = {
                     this.pelota.body.gravity.y = 1400*this.game.factor_slow_gravity;
                 }
             }
+            //socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, vx: this.pelota.body.velocity.x, vy:this.pelota.body.velocity.y});
+                
         }
     },
 
@@ -940,13 +980,17 @@ BasicGame.GameOnePlayer.prototype = {
         */
         this.pelota = this.add.sprite(32, 0, 'pelota');
         this.pelota.anchor.setTo(0.5, 0.5);
-        this.physics.arcade.enable(this.pelota);
-        this.pelota.body.bounce.y = 0.9;
-        this.pelota.body.bounce.x = 0.900;
-        this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
-        this.pelota.body.collideWorldBounds = true;
-        this.pelota.body.deltaMax = (400,400)
-        //console.log(this.pelota.body.position);
+        if (Player1.soyplayer1){
+            this.physics.arcade.enable(this.pelota);
+            this.pelota.body.gravity.y = 0;
+            this.pelota.body.bounce.y = 0.9;
+            this.pelota.body.bounce.x = 0.900;
+            this.pelota.body.gravity.y = 900*this.game.factor_slow_gravity;
+            this.pelota.body.collideWorldBounds = true;
+            this.pelota.body.deltaMax = (400,400)
+            //console.log(this.pelota.body.position);
+        }
+        
     }
 
 };

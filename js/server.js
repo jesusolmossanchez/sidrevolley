@@ -37,6 +37,7 @@ function onSocketConnection(client) {
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
     client.on("posicion pelota", onPosicionPelota);
+    client.on("tururu", onTururu);
 };
 function onClientDisconnect() {
     util.log("Player has disconnected: "+this.id);
@@ -62,7 +63,20 @@ function onMovePlayer(data) {
 	io.emit("samovio", data);
 };
 function onPosicionPelota(data) {
-	io.emit("situapelota", data);
+    //util.log(data)
+    //new_x = data.x+((data.vx*10)/60);
+    //new_y = data.y+((data.vy*10)/60);
+
+
+    //new_data = { x: new_x, y: new_y, vx: data.vx, vy: data.vy }
+    //util.log(new_data);
+    //if (new_y < 400){
+        //io.emit("situapelota", new_data);
+        io.emit("situapelota", data);
+   // }
+};
+function onTururu(data) {
+	io.emit("tururaki", data);
 };
 function init() {
     players = [];
