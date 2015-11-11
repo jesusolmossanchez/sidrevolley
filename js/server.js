@@ -2,86 +2,112 @@ var io = require('socket.io')(8080);
 Player = require("./Player").Player;
 var util = require("util");
 var setEventHandlers = function() {
-	io.sockets.on("connection", onSocketConnection);
+    io.sockets.on("connection", onSocketConnection);
 };
 
 
 var yasta = false;
 
 function onSocketConnection(client) {
-	//Me llega que se ha conectao alguien
+    //Me llega que se ha conectao alguien
     util.log("New player has connected: "+client.id);
 
+    //Creo el jugador correspondiente
+    //-player1 si es el primero en entrar
+    //-player2 si es el segundo
     if(players.length > 0){
-    	this.emit("new player2", client.id);
+        this.emit("new player2", client.id);
     }
     else{
-    	this.emit("new player", client.id);
+        this.emit("new player", client.id);
     }
+    //Añado el id_client al array
     players.push(client.id);
-    //util.log(players);
-    util.log(players.length);
+
     
+    //TODO -- EMITIR EL YASTA CUANDO LOS DOS JUGADORES HAYAN ENVIADO SU NOMBRE
+
+    //si se ha conectado el segundo jugador se llama al método que inicia todo
     if (players.length == 2){
-    	if(!yasta){
-    		yasta = true;
-    		this.emit("ya estamos todos");
-    	}
+        if(!yasta){
+            yasta = true;
+            this.emit("ya estamos todos");
+        }
     }
     else{
-    	yasta = false;
+        yasta = false;
     }
-	
-	
+
+
+    
+    
     client.on("disconnect", onClientDisconnect);
-    client.on("new player", onNewPlayer);
-    client.on("move player", onMovePlayer);
     client.on("posicion pelota", onPosicionPelota);
+    client.on("move player", onMovePlayer);
+    client.on("player_ready", onPlayerReady);
+
+
+    //TODO -- Estos dos no hacen falta??
+    client.on("new player", onNewPlayer);
     client.on("tururu", onTururu);
+
 };
+
+//Desconexión
 function onClientDisconnect() {
     util.log("Player has disconnected: "+this.id);
     util.log(players);
     players.splice(players.indexOf(this.id), 1);
     util.log(players);
 };
-function onNewPlayer(data) {
-	util.log("pasas por aqui?");
-	/*
-	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.getX(), y: newPlayer.getY()});
 
-	var i, existingPlayer;
-	for (i = 0; i < players.length; i++) {
-	    existingPlayer = players[i];
-	    this.emit("new player", {id: existingPlayer.id, x: existingPlayer.getX(), y: existingPlayer.getY()});
-	};
-	players.push(newPlayer);
-	*/
-};
+//propaga el movimiento
 function onMovePlayer(data) {
-	//util.log(data.id);
-	io.emit("samovio", data);
+    io.emit("samovio", data);
 };
+
+//Propaga la pelota
+//TODO -- revisar p2p!!!
 function onPosicionPelota(data) {
-    //util.log(data)
-    //new_x = data.x+((data.vx*10)/60);
-    //new_y = data.y+((data.vy*10)/60);
-
-
-    //new_data = { x: new_x, y: new_y, vx: data.vx, vy: data.vy }
-    //util.log(new_data);
-    //if (new_y < 400){
-        //io.emit("situapelota", new_data);
-        io.emit("situapelota", data);
-   // }
+    io.emit("situapelota", data);
 };
+
+
+function onPlayerReady(data) {
+
+    players_ready[data.id] = data.nombre;
+
+    //si se ha conectado el segundo jugador se llama al método que inicia todo
+    if (players_ready.length == 2){
+        if(!yasta){
+            yasta = true;
+            this.emit("ya estamos todos", JSON.stringify(players_ready));
+        }
+    }
+    else{
+        yasta = false;
+    }
+};
+
+
+
+//ELIMINAR ESTOS DOS????
+function onNewPlayer(data) {
+    util.log("pasas por aqui?");
+};
+
 function onTururu(data) {
-	io.emit("tururaki", data);
+    io.emit("tururaki", data);
 };
+
+
+
+
 function init() {
     players = [];
+    players_ready = {};
     io.set("transports", ["websocket"]);
-   	setEventHandlers();
+    setEventHandlers();
 };
 
 init();
