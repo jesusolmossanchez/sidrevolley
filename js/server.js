@@ -1,4 +1,10 @@
 var io = require('socket.io')(8080);
+
+//Buscar paquetes en npm
+var p2pserver = require('socket.io-p2p-server').Server;
+io.use(p2pserver)
+
+
 Player = require("./Player").Player;
 var util = require("util");
 var setEventHandlers = function() {
@@ -24,7 +30,6 @@ function onSocketConnection(client) {
     //Añado el id_client al array
     players.push(client.id);
 
-    
     //TODO -- EMITIR EL YASTA CUANDO LOS DOS JUGADORES HAYAN ENVIADO SU NOMBRE
 
     //si se ha conectado el segundo jugador se llama al método que inicia todo
@@ -37,9 +42,6 @@ function onSocketConnection(client) {
     else{
         yasta = false;
     }
-
-
-    
     
     client.on("disconnect", onClientDisconnect);
     client.on("posicion pelota", onPosicionPelota);

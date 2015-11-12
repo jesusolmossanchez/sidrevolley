@@ -28,6 +28,7 @@
 	<script src="js/GameOver.js"></script>
 	<script src="js/Player.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script src="js/socketiop2p.min.js"></script>
 	
 
     <script src="js/jquery.Jcrop.js"></script>
@@ -75,17 +76,26 @@
 </div>
 <div id="contiene_mandapuntos" style="">
 
-		<form id="mandapuntos">
-			<p id="texto_fin"></p>
-			<p id="puntos"></p>
-			<p id="envia_tus_puntos">Send  your  score:</p>
-			<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
-			<button id="envia_tu_nombre"> Enviar </button> 
-		</form>
-		<ul id="contiene_clasificacion">
-			<dl id="titulo_nivel"></dl>
-		</ul>
-	</div>
+	<form id="mandapuntos">
+		<p id="texto_fin"></p>
+		<p id="puntos"></p>
+		<p id="envia_tus_puntos">Send  your  score:</p>
+		<input id="inputtunombre" type="text" name="tu_nombre" maxlength="10"/>
+		<button id="envia_tu_nombre"> Enviar </button> 
+	</form>
+	<ul id="contiene_clasificacion">
+		<dl id="titulo_nivel"></dl>
+	</ul>
+</div>
+
+<!-- TODO: Hacer CSS
+<div id="socket_overlay">
+	<div id="soy_el_uno"> Reta a un colega </div>
+	<label id="volley_label"> Pon tu nombre </label>
+	<input class="volley_button" type="text" id="socket_nombre" maxlength="10"/>
+	<button id="socket_empezar"> Empezar </button>
+</div>
+-->
 
 <script type="text/javascript">
 

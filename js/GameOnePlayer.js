@@ -1,5 +1,3 @@
-
-
 BasicGame.GameOnePlayer = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
@@ -48,6 +46,17 @@ BasicGame.GameOnePlayer.prototype = {
         //conecto con socket
         socket = io.connect("http://192.168.0.198:8080", {port: 8080, transports: ["websocket"]});
 
+
+        //incluir en el index: https://raw.githubusercontent.com/socketio/socket.io-p2p/master/socketiop2p.min.js
+        p2p = new P2P(socket);
+
+        p2p.on('ready', function(){
+          p2p.usePeerConnection = true;
+          console.log(p2p);
+          p2p.emit('peer-obj', { peerId: peerId });
+        })
+
+
         //llamo a la función que maneja los mensajes recibidos
         setEventHandlers();
 
@@ -68,7 +77,12 @@ BasicGame.GameOnePlayer.prototype = {
                 //TODO -- EN LA CREACIÓN MOSTRAR UNA CAPA ENCIMA DEL CAVAS
                 //EN ESA CAPA SE PEDIRÁ UN NOMBRE Y HABRÁ UN ENLACE PARA 'RETAR A UN AMIGO'
                 //UNA VEZ ENVIADO SE DEBE EMITIR ALGO COMO:
-                //socket.emit("player_ready", {nombre: Player1.nombre, Player1.id});
+                //$("#socket_overlay").show();
+                //$("#soy_el_uno").show();
+                ////$("#socket_empezar").click(function(){
+                //     Player1.nombre = $("#socket_nombre").val();
+                //     socket.emit("player_ready", {nombre: Player1.nombre, id: Player1.id});
+                //});
 
 
             }
@@ -90,7 +104,11 @@ BasicGame.GameOnePlayer.prototype = {
 
                 //TODO -- EN LA CREACIÓN MOSTRAR UNA CAPA ENCIMA DEL CAVAS
                 //EN ESA CAPA SE PEDIRÁ UN NOMBRE, UNA VEZ ENVIADO SE DEBE EMITIR ALGO COMO:
-                //socket.emit("player_ready", {nombre: Player1.nombre, id: Player1.id});
+                //$("#socket_overlay").show();
+                //$("#socket_empezar").click(function(){
+                //     Player1.nombre = $("#socket_nombre").val();
+                //     socket.emit("player_ready", {nombre: Player1.nombre, id: Player1.id});
+                //});
 
             }
             
@@ -112,8 +130,11 @@ BasicGame.GameOnePlayer.prototype = {
             //TODO -- QUITO LA CAPA ENCIMA DEL CANVAS Y EL JUEGO PUEDE EMPEZAR
             //
             //TODO -- PONGO
+            //Dependiendo de quien soy yo
+            //Pillar dat[0].id y comprobar con Player1.id
             //this.scoreText1.text = data[0].nombre + "-" + this.game.puntos_player1;
             //this.scoreText2.text = data[1].nombre + "-" + this.game.puntos_player2;
+            //$("#socket_overlay").hide();
 
             //Puedo empezar... empiezo
             console.log("palante!!");
@@ -155,11 +176,13 @@ BasicGame.GameOnePlayer.prototype = {
 
         function onSituaPelota(data) {
             if (!Player1.soyplayer1){
-
+                //console.log("recivo",eljuego.time.now);
                 eljuego.pelota.angle = data.angulo;
+                
                 eljuego.pelota.x = data.x;
                 eljuego.pelota.y = data.y;
-
+                
+                //tween = eljuego.add.tween(eljuego.pelota).to( { x: [ eljuego.pelota.x, data.x ], y: [ eljuego.pelota.y, data.y ] }, 5, Phaser.Easing.Linear.None, true);
             }
         };
 
@@ -181,7 +204,8 @@ BasicGame.GameOnePlayer.prototype = {
             // Player move message received
             socket.on("samovio", onSaMovio);
             // Player move message received
-            socket.on("situapelota", onSituaPelota);
+            //socket.on("situapelota", onSituaPelota);
+            p2p.on("posicion pelota", onSituaPelota);
             // Player removed message received
             socket.on("remove player", onRemovePlayer);
             // Player removed message received
@@ -549,9 +573,10 @@ BasicGame.GameOnePlayer.prototype = {
             this.pelota.angle += this.pelota.body.velocity.x/20;
             this.physics.arcade.collide(this.pelota, platforms);
             
+            p2p.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, angulo: this.pelota.angle});
             if (this.time.now > this.sincronizapelotatime){
-                socket.emit("posicion pelota", {x: this.pelota.x, y: this.pelota.y, angulo: this.pelota.angle});
-                this.sincronizapelotatime = this.time.now + 30;        
+                //console.log("emito",eljuego.time.now);
+                this.sincronizapelotatime = this.time.now + 20;        
             }
         }
         /***********************************************************************

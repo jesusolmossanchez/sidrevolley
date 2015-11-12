@@ -39,7 +39,6 @@ var Player = function(ruta, juego, id) {
     this.sprite.hace_gorrino = false;
     this.sprite.para_gorrino = false;
 
-    
 
     this.sprite.frame = 1;
 
