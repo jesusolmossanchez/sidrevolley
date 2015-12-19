@@ -45,8 +45,10 @@ function onSocketConnection(client) {
     
     client.on("disconnect", onClientDisconnect);
     client.on("posicion pelota", onPosicionPelota);
+    client.on("posicion jugador1", onPosicionJugador1);
     client.on("move player", onMovePlayer);
     client.on("player_ready", onPlayerReady);
+    client.on("teclas", onTeclas);
 
 
     //TODO -- Estos dos no hacen falta??
@@ -68,10 +70,20 @@ function onMovePlayer(data) {
     io.emit("samovio", data);
 };
 
+//propaga el movimiento
+function onTeclas(data) {
+    io.emit("recibeteclas", data);
+};
+
 //Propaga la pelota
 //TODO -- revisar p2p!!!
 function onPosicionPelota(data) {
     io.emit("situapelota", data);
+};
+
+//TODO -- revisar p2p!!!
+function onPosicionJugador1(data) {
+    io.emit("situajugador1", data);
 };
 
 
